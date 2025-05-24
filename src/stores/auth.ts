@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import { router } from '@/router';
 import { fetchWrapper } from '@/utils/helpers/fetch-wrapper';
 import { base_url } from '@/utils/config';
-import { successMessage } from '@/utils/helpers/messages';
 
 export const useAuthStore = defineStore({
   id: 'auth',
@@ -10,23 +9,23 @@ export const useAuthStore = defineStore({
     // Validate data from local storage during initialization
     user: validateLocalStorageItem('user', true), // Validate user as an object
     token: validateLocalStorageItem('token', false), // Validate token as a string
-    barcode_prefix: validateLocalStorageItem('barcode_prefix', false), // Validate token as a string
+    placeholder_image: validateLocalStorageItem('placeholder_image', false), // Validate token as a string
     returnUrl: null,
   }),
   actions: {
     async login(email: string, password: string) {
       try {
-        const responseData = await fetchWrapper.post(`${base_url}/login/by-email-password`, { email, password });
+        const responseData = await fetchWrapper.post(`${base_url}/login`, { email, password });
         if (responseData && responseData.data && responseData.data.user) {
           // Update Pinia state
           this.user = responseData?.data?.user;
-          this.token = responseData?.data?.token?.access_token;
-          this.barcode_prefix = responseData?.data?.barcode_prefix;
+          this.token = responseData?.data?.token;
+          this.placeholder_image = responseData?.data?.placeholder_image;
           
           // Persist to local storage
           localStorage.setItem('user', JSON.stringify(this.user));
           localStorage.setItem('token', this.token);
-          localStorage.setItem('barcode_prefix', this.barcode_prefix);
+          localStorage.setItem('placeholder_image', this.placeholder_image);
           // Redirect to the previous URL or default to dashboard
           router.push('/dashboard');
         }
@@ -43,7 +42,7 @@ export const useAuthStore = defineStore({
       // Remove from local storage
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-      localStorage.removeItem('barcode_prefix');
+      localStorage.removeItem('placeholder_image');
 
       window.location.href = '/login'; // Redirect to avoid role issue
     },

@@ -4,12 +4,12 @@ const DalileeTheme: ThemeTypes = {
   name: 'DalileeTheme',
   dark: false,
   variables: {
-    'border-color': '#13A3DD',
+    'border-color': '#550575',
     'carousel-control-size': 10
   },
   colors: {
-    primary: '#13A3DD',
-    secondary: '#13A3DD',
+    primary: '#550575',
+    secondary: '#550575',
     secondary0: '#f2fde4',
     secondary1: '#DCEDC8',
     secondary2: '#C5E1A5',

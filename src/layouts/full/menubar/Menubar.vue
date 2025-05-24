@@ -61,7 +61,7 @@ function searchbox() {
                 <UserCircleIcon size="20" />
               </template>
   
-            <span class="font-weight-regular">{{user?.name}}</span>
+            <span class="font-weight-regular">{{user?.first_name}} {{user?.last_name}}</span>
           </v-btn>
         </template>
         <v-sheet rounded="md" width="300" elevation="12">

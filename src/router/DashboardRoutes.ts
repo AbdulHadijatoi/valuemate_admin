@@ -29,55 +29,83 @@ const DashboardRoutes = {
       component: () => import('@/views/dashboard/Dashboard.vue')
     },
     {
-      name: 'Delivered',
-      path: '/delivered',
-      component: () => import('@/views/dashboard/OrderPages/DeliveredOrders.vue')
+      name: 'Chats',
+      path: '/chats',
+      // component: () => import('@/views/dashboard/Chats/Chats.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
     {
-      name: 'Collection',
-      path: '/collection',
-      component: () => import('@/views/dashboard/OrderPages/CollectionOrders.vue')
+      name: 'Users',
+      path: '/users',
+      // component: () => import('@/views/dashboard/Users/Users.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
     {
-      name: 'Inbound',
-      path: '/inbound',
-      component: () => import('@/views/dashboard/OrderPages/InboundOrders.vue')
-    },
-    // {
-    //   name: 'Outbound',
-    //   path: '/outbound-orders',
-    //   component: () => import('@/views/dashboard/OrderPages/OutboundOrders.vue')
-    // },
-    {
-      name: 'Inventory',
-      path: '/inventory',
-      component: () => import('@/views/dashboard/OrderPages/InventoryOrders.vue')
+      name: 'Locations',
+      path: '/locations',
+      // component: () => import('@/views/dashboard/Locations/Locations.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
     {
-      name: 'Pending Shelf',
-      path: '/pending-shelf',
-      component: () => import('@/views/dashboard/OrderPages/PendingShelfOrders.vue')
+      name: 'Banner Ads',
+      path: '/banner-ads',
+      // component: () => import('@/views/dashboard/BannerAds/BannerAds.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
     {
-      name: 'Pending Confirmed Ndr',
-      path: '/pending-confirmed-ndr',
-      component: () => import('@/views/dashboard/OrderPages/PendingConfirmedNdr.vue')
+      name: 'Companies',
+      path: '/companies',
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
     {
-      name: 'Pending Receive',
-      path: '/pending-receive',
-      component: () => import('@/views/dashboard/OrderPages/PendingReceiveOrders.vue')
+      name: 'Settings',
+      path: '/settings',
+      // component: () => import('@/views/dashboard/Settings/Settings.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
     {
-      name: 'Delivered By Voucher',
-      path: '/delivered-by-voucher',
-      component: () => import('@/views/dashboard/OrderPages/DeliveredByVoucher.vue')
+      name: 'Property Types',
+      path: '/property-types',
+      // component: () => import('@/views/dashboard/PropertyTypes/PropertyTypes.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
     {
-      name: 'Delivered By Collection Voucher',
-      path: '/delivered-by-collection-voucher',
-      component: () => import('@/views/dashboard/OrderPages/DeliveredByCollectionVoucher.vue')
+      name: 'Service Types',
+      path: '/service-types',
+      // component: () => import('@/views/dashboard/ServiceTypes/ServiceTypes.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
+    {
+      name: 'Property Service Types',
+      path: '/property-service-types',
+      // component: () => import('@/views/dashboard/PropertyServiceTypes/PropertyServiceTypes.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
+    },
+    {
+      name: 'Service Pricing',
+      path: '/service-pricing',
+      // component: () => import('@/views/dashboard/ServicePricing/ServicePricing.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
+    },
+    {
+      name: 'Document Requirements',
+      path: '/document-requirements',
+      // component: () => import('@/views/dashboard/DocumentRequirements/DocumentRequirements.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
+    },
+    {
+      name: 'Valuation Requests',
+      path: '/valuation-requests',
+      // component: () => import('@/views/dashboard/ValuationRequests/ValuationRequests.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
+    },
+    {
+      name: 'Payments',
+      path: '/payments',
+      // component: () => import('@/views/dashboard/Payments/Payments.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
+    },
+    
   ]
 };
 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import Logo from '@/layouts/full/logo/LogoDark.vue';
+import Logo from '@/layouts/full/logo/LogoMain.vue';
 import AuthLogin from '../authForms/AuthLogin.vue';
+
+// call api to fetch logo
 </script>
 
 <template>
@@ -18,7 +20,8 @@ import AuthLogin from '../authForms/AuthLogin.vue';
                     <v-row>
                       <v-col cols="12" class="text-center">
                         <!-- <Logo /> -->
-                        <img :src="'/logo.png'" height="45px" alt="logo" />
+                        <!-- <img :src="'/logo.png'" height="45px" alt="logo" /> -->
+                        <Logo />
                         <h4 class="text-disabled text-h4 mt-3">Enter your credentials to continue</h4>
                       </v-col>
                     </v-row>

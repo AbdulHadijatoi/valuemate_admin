@@ -22,7 +22,7 @@ function greetingMessage() {
 
 <template>
   <div class="pa-4">
-    <h4 class="mb-n1">{{greetingMessage()}}, <span class="font-weight-regular">{{user?.name}}</span></h4>
+    <h4 class="mb-n1">{{greetingMessage()}}, <span class="font-weight-regular">{{user?.first_name}} {{user?.last_name}}</span></h4>
     <span class="text-subtitle-2 text-medium-emphasis">{{user?.email}}</span>
 
     <perfect-scrollbar>

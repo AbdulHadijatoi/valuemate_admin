@@ -1,23 +1,18 @@
 import {
   DashboardIcon,
   SettingsIcon,
-  UserIcon,
-  LockIcon,
-  SubscriptIcon,
-  FormsIcon,
   HistoryIcon,
   ListIcon,
   ListCheckIcon,
-  ListDetailsIcon,
-  InboxIcon,
-  BrandDeliverooIcon,
-  GlassFullIcon,
-  AwardIcon,
-  OutboundIcon,
-  ArrowDownIcon,
-  StormIcon,
-  BoxModelIcon,
-  BoxSeamIcon,
+  AdIcon,
+  LocationIcon,
+  UsersIcon,
+  MessageIcon,
+  BuildingIcon,
+  CategoryIcon,
+  Category2Icon,
+  MenuIcon,
+  PackagesIcon
 } from 'vue-tabler-icons';
 // import { isSuperAdmin } from '@/utils/api';
 
@@ -45,55 +40,78 @@ const allMenuItems: menu[] = [
     to: '/dashboard',
   },
   {
-    title: 'Delivered',
-    icon: AwardIcon,
-    to: '/delivered',
+    title: 'Valuation Requests',
+    icon: ListCheckIcon,
+    to: '/valuation-requests',
+  },
+
+  {
+    title: 'Companies',
+    icon: ListIcon,
+    to: '/companies',
+  },
+
+  {
+    title: 'Service Pricing',
+    icon: PackagesIcon,
+    to: '/service-pricing',
+  },
+  
+  
+  {
+    title: 'Banner Ads',
+    icon: AdIcon,
+    to: '/banner-ads',
+  },
+  
+  {
+    title: 'Property Types',
+    icon: BuildingIcon,
+    to: '/property-types',
   },
   {
-    title: 'Collection',
-    icon: ListDetailsIcon,
-    to: '/collection',
+    title: 'Service Types',
+    icon: CategoryIcon,
+    to: '/service-types',
   },
   {
-    title: 'Inbound',
-    icon: ArrowDownIcon,
-    to: '/inbound',
-  },
-  // {
-  //   title: 'Outbound',
-  //   icon: OutboundIcon,
-  //   to: '/outbound',
-  // },
-  {
-    title: 'Inventory',
-    icon: StormIcon,
-    to: '/inventory',
+    title: 'Property Service Types',
+    icon: Category2Icon,
+    to: '/property-service-types',
   },
   {
-    title: 'Pending Shelf',
-    icon: BoxSeamIcon,
-    to: '/pending-shelf',
+    title: 'Document Requirements',
+    icon: MenuIcon,
+    to: '/document-requirements',
   },
   {
-    title: 'Pending Confirmed NDR',
-    icon: BoxSeamIcon,
-    to: '/pending-confirmed-ndr',
+    title: 'Locations',
+    icon: LocationIcon,
+    to: '/locations',
   },
   {
-    title: 'Pending Receive',
-    icon: BoxSeamIcon,
-    to: '/pending-receive',
+    title: 'Payments',
+    icon: HistoryIcon,
+    to: '/payments',
   },
+
   {
-    title: 'Delivered By Voucher',
-    icon: BoxSeamIcon,
-    to: '/delivered-by-voucher',
-  },
-  {
-    title: 'Delivered By Collection Voucher',
-    icon: BoxSeamIcon,
-    to: '/delivered-by-collection-voucher',
-  },
+      title: 'Users',
+      icon: UsersIcon,
+      to: '/users',
+    },
+
+    {
+      title: 'Chats',
+      icon: MessageIcon,
+      to: '/chats',
+    },
+    {
+      title: 'Settings',
+      icon: SettingsIcon,
+      to: '/settings',
+    },
+  
   
 ];
 

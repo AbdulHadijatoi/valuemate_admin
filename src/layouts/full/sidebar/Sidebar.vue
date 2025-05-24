@@ -26,7 +26,7 @@ const sidebarMenu = shallowRef(sidebarItems);
   >
     <!---Logo part -->
 
-    <div class="py-4 px-3">
+    <div class="">
       <Logo />
     </div>
     <!-- ---------------------------------------------- -->

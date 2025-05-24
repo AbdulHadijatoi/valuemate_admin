@@ -41,7 +41,7 @@ function request(method: Method) {
     };
 
     if (body) {
-      config.headers = { ...config.headers, 'Content-Type': 'application/json' };
+      config.headers = { ...config.headers, 'Content-Type': 'multipart/form-data' };
       config.data = body;
     }
 

@@ -4,7 +4,6 @@ import Google from '@/assets/images/auth/social-google.svg';
 import { useAuthStore } from '@/stores/auth';
 import { Form } from 'vee-validate';
 
-const checkbox = ref(false);
 const valid = ref(false);
 const show1 = ref(false);
 //const logform = ref();
@@ -12,7 +11,6 @@ const password = ref('');
 const email = ref('');
 const passwordRules = ref([
   (v: string) => !!v || 'Password is required',
-  (v: string) => (v && v.length <= 10) || 'Password must be less than 10 characters'
 ]);
 const emailRules = ref([(v: string) => !!v || 'E-mail is required', (v: string) => /.+@.+\..+/.test(v) || 'E-mail must be valid']);
 

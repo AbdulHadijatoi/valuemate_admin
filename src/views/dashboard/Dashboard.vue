@@ -71,10 +71,10 @@ export default {
         class="pa-4 text-center"
       >
         <v-card-title class="text-h2 mb-2 text-bold text-primary">
-          Welcome to Pudo Dashboard!
+          Welcome to Valumate Dashboard!
         </v-card-title>
         <v-card-text class="text-[30px] mb-4">
-          Everything you need to get started is just a click away! Explore the tabs on left to manage your orders, view reports, and more.  
+          Everything you need to get started is just a click away! Explore the tabs on left to manage valuation requests, view reports, and more.  
         </v-card-text>
        
         
