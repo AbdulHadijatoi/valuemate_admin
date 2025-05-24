@@ -70,7 +70,7 @@ export default {
         },
         download() {
           const { token } = useAuthStore();
-          
+            this.loading = true;
             axios.post(`${base_url}/admin/companies/export`, {
               from_date: this.dateRange ? this.formatDate(this.dateRange[0]) : null,
               to_date: this.dateRange ? this.formatDate(this.dateRange[1]) : null,
@@ -89,9 +89,11 @@ export default {
 
                 document.body.appendChild(link);
                 link.click();
+                this.loading = false;
             })
             .catch(error => {
                 console.log(error);
+                this.loading = false;
             });
         },
         view(item) {
@@ -157,7 +159,7 @@ export default {
           <div class="d-sm-flex align-center justify-space-between">
             <v-card-title>Companies</v-card-title>
             <div>
-              <v-btn color="secondary" @click="download()" class="mr-2"><DownloadIcon size="20" class="mr-2"/>Download Excel</v-btn>
+              <v-btn color="secondary" @click="download()" :disabled="loading" class="mr-2"><DownloadIcon size="20" class="mr-2"/>Download Excel</v-btn>
               <v-btn color="accent" @click="create()"><PlusIcon size="20" class="mr-2"/>Add New Company</v-btn>
             </div>
           </div>

@@ -91,7 +91,7 @@ export default {
               </v-col>
 
               <v-col cols="12" class="text-right">
-                <v-btn :loading="loading" color="primary" type="submit">
+                <v-btn :disabled="loading" color="primary" type="submit">
                   Save
                 </v-btn>
               </v-col>
