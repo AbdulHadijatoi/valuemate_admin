@@ -47,7 +47,8 @@ export default {
         } else {
           errorMessage(responseData?.message || 'Upload failed.');
         }
-
+        this.$emit('getData');
+        this.$emit('close');
       } catch (error) {
         console.error('Upload failed:', error);
       } finally {
@@ -86,7 +87,7 @@ export default {
           </v-row>
 
 
-          <v-btn elevation="0" size="large" color="primary" @click="uploadDocuments" :loading="loading">
+          <v-btn :disabled="loading" elevation="0" size="large" color="primary" @click="uploadDocuments">
             Upload
           </v-btn>
         </v-card-text>

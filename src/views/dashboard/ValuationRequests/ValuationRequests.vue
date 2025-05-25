@@ -324,7 +324,7 @@ export default {
   <!-- Upload document dialog -->
   <v-dialog v-model="uploadDialog" max-width="800px">
     <v-card>
-      <upload-documents :selectedRow="selectedRow" @close="uploadDialog = false"/>
+      <upload-documents :selectedRow="selectedRow" @getData="getData()" @close="uploadDialog = false"/>
     </v-card>
   </v-dialog>
   
