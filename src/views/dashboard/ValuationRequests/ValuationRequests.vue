@@ -178,7 +178,7 @@ export default {
       <v-card variant="flat">
         <v-card-item>
           <div class="d-sm-flex align-center justify-space-between">
-            <v-card-title>Companies</v-card-title>
+            <v-card-title>Valuation Requests</v-card-title>
             <div>
               <v-btn color="secondary" @click="download()" :disabled="loading" class="mr-2"><DownloadIcon size="20" class="mr-2"/>Download Excel</v-btn>
               <v-btn color="accent" @click="create()"><PlusIcon size="20" class="mr-2"/>Create New Valuation Request</v-btn>
