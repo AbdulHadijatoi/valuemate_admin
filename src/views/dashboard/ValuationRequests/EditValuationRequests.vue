@@ -39,7 +39,6 @@ export default {
           property_type_id,
           company_id,
           request_type_id,
-          service_pricing_id,
           area
         } = this.form;
 
@@ -228,7 +227,7 @@ export default {
               <v-col cols="6">
                 <v-text-field
                   v-model="form.area"
-                  label="Area"
+                  label="Area (meter square)"
                   min="0"
                   
                   density="compact"

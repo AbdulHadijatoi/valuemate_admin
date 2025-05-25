@@ -9,10 +9,12 @@ import { useAuthStore } from '@/stores/auth';
 import ViewValuationRequests from './ViewValuationRequests.vue';
 import EditValuationRequests from './EditValuationRequests.vue';
 import CreateValuationRequests from './CreateValuationRequests.vue';
+import UploadDocuments from './UploadDocuments.vue';
+import ViewDocuments from './ViewDocuments.vue';
 import { successMessage } from '@/utils/helpers/messages';
 
 export default {
-    components: { VueDatePicker, ViewValuationRequests, EditValuationRequests, CreateValuationRequests },
+    components: { VueDatePicker, ViewValuationRequests, EditValuationRequests, CreateValuationRequests, UploadDocuments, ViewDocuments },
 
     data() {
         return {
@@ -26,7 +28,7 @@ export default {
                 { title: 'Request Type', key: 'request_type', filterable: true,},
                 { title: 'Location', key: 'location', filterable: true,},
                 { title: 'Service Pricing', key: 'service_pricing', filterable: true,},
-                { title: 'Area', key: 'area', filterable: true,},
+                { title: 'Area (meter squire)', key: 'area', filterable: true,},
                 { title: 'Total Amount', key: 'total_amount', filterable: true,},
                 { title: 'Status', key: 'status', filterable: true,},
                 { title: 'Reference', key: 'reference', filterable: true,},
@@ -45,6 +47,8 @@ export default {
             viewDialog: false,
             editDialog: false,
             deleteDialog: false,
+            uploadDialog: false,
+            viewDocumentsDialog: false,
         }
     },
 
@@ -106,7 +110,7 @@ export default {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', `companies_${new Date().getTime()}.xlsx`);
+                link.setAttribute('download', `valuation_requests_${new Date().getTime()}.xlsx`);
 
                 document.body.appendChild(link);
                 link.click();
@@ -127,6 +131,15 @@ export default {
         },
         create() {
           this.createDialog = true;
+        },
+        
+        openUploadDocumentsDialog(item) {
+          this.selectedRow = item;
+          this.uploadDialog = true;
+        },
+        viewDocuments(selectedRow) {
+          this.selectedRow = selectedRow;
+          this.viewDocumentsDialog = true;
         },
         deleteRow(item) {
           this.selectedRow = item;
@@ -181,7 +194,7 @@ export default {
           <div class="d-sm-flex align-center justify-space-between">
             <v-card-title>Valuation Requests</v-card-title>
             <div>
-              <v-btn color="secondary" @click="download()" :disabled="loading || !data" class="mr-2"><DownloadIcon size="20" class="mr-2"/>Download Excel</v-btn>
+              <v-btn color="secondary" @click="download()" :disabled="loading || !data || data.length == 0" class="mr-2"><DownloadIcon size="20" class="mr-2"/>Download Excel</v-btn>
               <v-btn color="accent" @click="create()"><PlusIcon size="20" class="mr-2"/>Create New Valuation Request</v-btn>
             </div>
           </div>
@@ -231,6 +244,24 @@ export default {
             <template v-slot:item.actions="{ item }">
               <div class="d-flex align-center">
                 
+                <v-tooltip v-if="item.required_documents" location="start">
+                  <template #activator="{ props }">
+                    <v-chip color="primary" rounded="pill"   class="mr-2 py-5" v-bind="props" @click="openUploadDocumentsDialog(item)">
+                      <UploadIcon size="20"/>
+                    </v-chip>
+                  </template>
+                  <span>Upload Documents</span>
+                </v-tooltip>
+
+                <v-tooltip v-if="item.has_documents" location="start">
+                  <template #activator="{ props }">
+                    <v-chip color="primary" rounded="pill"   class="mr-2 py-5" v-bind="props" @click="viewDocuments(item)">
+                      <FileIcon size="20"/>
+                    </v-chip>
+                  </template>
+                  <span>View Documents</span>
+                </v-tooltip>
+
                 <v-tooltip location="start">
                   <template #activator="{ props }">
                     <v-chip color="primary" rounded="pill"   class="mr-2 py-5" v-bind="props" @click="view(item)">
@@ -287,6 +318,19 @@ export default {
   <v-dialog v-model="createDialog" max-width="800px">
     <v-card>
       <create-valuation-requests :constants="constants" @getData="getData()" @close="createDialog = false"/>
+    </v-card>
+  </v-dialog>
+  
+  <!-- Upload document dialog -->
+  <v-dialog v-model="uploadDialog" max-width="800px">
+    <v-card>
+      <upload-documents :selectedRow="selectedRow" @close="uploadDialog = false"/>
+    </v-card>
+  </v-dialog>
+  
+  <v-dialog v-model="viewDocumentsDialog" max-width="800px">
+    <v-card>
+      <view-documents :selectedRow="selectedRow" @close="viewDocumentsDialog = false"/>
     </v-card>
   </v-dialog>
 

@@ -203,7 +203,7 @@ export default {
               <v-col cols="6">
                 <v-text-field
                   v-model="form.area"
-                  label="Area"
+                  label="Area (meter square)"
                   min="0"
                   
                   density="compact"
