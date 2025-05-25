@@ -159,7 +159,7 @@ export default {
           <div class="d-sm-flex align-center justify-space-between">
             <v-card-title>Companies</v-card-title>
             <div>
-              <v-btn color="secondary" @click="download()" :disabled="loading" class="mr-2"><DownloadIcon size="20" class="mr-2"/>Download Excel</v-btn>
+              <v-btn color="secondary" @click="download()" :disabled="loading || !data" class="mr-2"><DownloadIcon size="20" class="mr-2"/>Download Excel</v-btn>
               <v-btn color="accent" @click="create()"><PlusIcon size="20" class="mr-2"/>Add New Company</v-btn>
             </div>
           </div>
