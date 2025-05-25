@@ -9,7 +9,7 @@ import { useAuthStore } from '@/stores/auth';
 
 export default {
     props: {
-        company: {
+        selectedRow: {
             type: Object,
             required: true,
         }
@@ -47,30 +47,31 @@ export default {
       <v-card variant="flat">
         <v-card-item>
           <div class="d-sm-flex align-center justify-space-between">
-            <v-card-title>{{company.name}}</v-card-title>
+            <v-card-title>Valuation Request #{{ selectedRow.id }}</v-card-title>
           </div>
         </v-card-item>
         <v-divider></v-divider>
         <v-card-text>
 
-          <v-row class="p-0 m" style="background-color: white;">
-            <v-col cols="12">
+          <v-row class="p-0" style="background-color: white;">
+
+            <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
-                <v-col cols="2">
-                  <span class="bold-text">Company Image</span> 
+                <v-col cols="4">
+                  <span class="bold-text">Company Name</span> 
                 </v-col>
-                <v-col cols="10">
-                  <a :href="company.file" style=" color: black; " class="mx-2" target="_blank">{{company.file}}</a>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.company_name}}</span>
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
+            <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Name</span> 
+                  <span class="bold-text">User Name</span> 
                 </v-col>
                 <v-col cols="8">
-                  <span class="mx-2">{{company.name}}</span>
+                  <span class="mx-2">{{selectedRow.user_name}}</span>
                 </v-col>
               </v-row>
             </v-col>
@@ -79,20 +80,20 @@ export default {
             <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Address</span> 
+                  <span class="bold-text">Property Type</span> 
                 </v-col>
                 <v-col cols="8">
-                  <span class="mx-2">{{company.address}}</span>
+                  <span class="mx-2">{{selectedRow.property_type}}</span>
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="6">
+            <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Phone</span> 
+                  <span class="bold-text">Service Type</span> 
                 </v-col>
                 <v-col cols="8">
-                  <span class="mx-2">{{company.phone}}</span>
+                  <span class="mx-2">{{selectedRow.service_type}}</span>
                 </v-col>
               </v-row>
             </v-col>
@@ -100,10 +101,21 @@ export default {
             <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Email</span> 
+                  <span class="bold-text">Request Type</span> 
                 </v-col>
                 <v-col cols="8">
-                  <span class="mx-2">{{company.email}}</span>
+                  <span class="mx-2">{{selectedRow.request_type}}</span>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col cols="6">
+              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+                <v-col cols="4">
+                  <span class="bold-text">Location</span> 
+                </v-col>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.location}}</span>
                 </v-col>
               </v-row>
             </v-col>
@@ -111,57 +123,81 @@ export default {
             <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Website</span> 
+                  <span class="bold-text">Service Pricing</span> 
                 </v-col>
                 <v-col cols="8">
-                  <span class="mx-2">{{company.website}}</span>
+                  <span class="mx-2">{{selectedRow.service_pricing}}</span>
+                </v-col>
+              </v-row>
+            </v-col>
+            
+            
+            <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
+              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+                <v-col cols="4">
+                  <span class="bold-text">Area</span> 
+                </v-col>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.area}}</span>
                 </v-col>
               </v-row>
             </v-col>
 
-            <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
+            <v-col cols="6">
+              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+                <v-col cols="4">
+                  <span class="bold-text">Total Amount</span> 
+                </v-col>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.total_amount}}</span>
+                </v-col>
+              </v-row>
+            </v-col>
+            
+            <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
                   <span class="bold-text">Status</span> 
                 </v-col>
                 <v-col cols="8">
-                  <span class="mx-2">{{company.status}}</span>
+                  <span class="mx-2">{{selectedRow.status}}</span>
                 </v-col>
               </v-row>
             </v-col>
             
-            
-            <v-col cols="6">
+            <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Created Date</span> 
+                  <span class="bold-text">Reference</span> 
                 </v-col>
                 <v-col cols="8">
-                  <span class="mx-2">{{company.created_at_date}}</span>
+                  <span class="mx-2">{{selectedRow.reference}}</span>
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="6">
+            
+            <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Created Time</span> 
+                  <span class="bold-text">Created At Date</span> 
                 </v-col>
                 <v-col cols="8">
-                  <span class="mx-2">{{company.created_at_time}}</span>
+                  <span class="mx-2">{{selectedRow.created_at_date}}</span>
                 </v-col>
               </v-row>
             </v-col>
 
-            <v-col cols="12" style="background-color: rgba(0,0,0,0.1);">
+            <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
-                <v-col cols="2">
-                  <span class="bold-text">Description</span> 
+                <v-col cols="4">
+                  <span class="bold-text">Created At Time</span> 
                 </v-col>
-                <v-col cols="10">
-                  <span class="mx-2">{{company.description}}</span>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.created_at_time}}</span>
                 </v-col>
               </v-row>
             </v-col>
+
           </v-row>
           
         </v-card-text>

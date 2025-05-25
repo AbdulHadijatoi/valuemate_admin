@@ -52,19 +52,6 @@ const allMenuItems: menu[] = [
   },
 
   {
-    title: 'Service Pricing',
-    icon: PackagesIcon,
-    to: '/service-pricing',
-  },
-  
-  
-  {
-    title: 'Banner Ads',
-    icon: AdIcon,
-    to: '/banner-ads',
-  },
-  
-  {
     title: 'Property Types',
     icon: BuildingIcon,
     to: '/property-types',
@@ -84,6 +71,20 @@ const allMenuItems: menu[] = [
     icon: MenuIcon,
     to: '/document-requirements',
   },
+
+  {
+    title: 'Service Pricing',
+    icon: PackagesIcon,
+    to: '/service-pricing',
+  },
+  
+  
+  {
+    title: 'Banner Ads',
+    icon: AdIcon,
+    to: '/banner-ads',
+  },
+
   {
     title: 'Locations',
     icon: LocationIcon,

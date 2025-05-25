@@ -96,8 +96,7 @@ const DashboardRoutes = {
     {
       name: 'Valuation Requests',
       path: '/valuation-requests',
-      // component: () => import('@/views/dashboard/ValuationRequests/ValuationRequests.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      component: () => import('@/views/dashboard/ValuationRequests/ValuationRequests.vue')
     },
     {
       name: 'Payments',
