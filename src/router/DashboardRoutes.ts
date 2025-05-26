@@ -66,20 +66,17 @@ const DashboardRoutes = {
     {
       name: 'Property Types',
       path: '/property-types',
-      // component: () => import('@/views/dashboard/PropertyTypes/PropertyTypes.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      component: () => import('@/views/dashboard/PropertyTypes/PropertyTypes.vue')
     },
     {
       name: 'Service Types',
       path: '/service-types',
-      // component: () => import('@/views/dashboard/ServiceTypes/ServiceTypes.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      component: () => import('@/views/dashboard/ServiceTypes/ServiceTypes.vue')
     },
     {
       name: 'Property Service Types',
       path: '/property-service-types',
-      // component: () => import('@/views/dashboard/PropertyServiceTypes/PropertyServiceTypes.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      component: () => import('@/views/dashboard/PropertyServiceTypes/PropertyServiceTypes.vue')
     },
     {
       name: 'Service Pricing',
@@ -90,8 +87,7 @@ const DashboardRoutes = {
     {
       name: 'Document Requirements',
       path: '/document-requirements',
-      // component: () => import('@/views/dashboard/DocumentRequirements/DocumentRequirements.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      component: () => import('@/views/dashboard/DocumentRequirements/DocumentRequirements.vue')
     },
     {
       name: 'Valuation Requests',
