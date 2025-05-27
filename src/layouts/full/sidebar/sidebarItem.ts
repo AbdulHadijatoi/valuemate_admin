@@ -73,9 +73,9 @@ const allMenuItems: menu[] = [
   },
 
   {
-    title: 'Service Pricing',
+    title: 'Pricing Rules',
     icon: PackagesIcon,
-    to: '/service-pricing',
+    to: '/pricing-rules',
   },
   
   

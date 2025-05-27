@@ -43,8 +43,7 @@ const DashboardRoutes = {
     {
       name: 'Locations',
       path: '/locations',
-      // component: () => import('@/views/dashboard/Locations/Locations.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      component: () => import('@/views/dashboard/Locations/Locations.vue')
     },
     {
       name: 'Banner Ads',
@@ -79,10 +78,9 @@ const DashboardRoutes = {
       component: () => import('@/views/dashboard/PropertyServiceTypes/PropertyServiceTypes.vue')
     },
     {
-      name: 'Service Pricing',
-      path: '/service-pricing',
-      // component: () => import('@/views/dashboard/ServicePricing/ServicePricing.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      name: 'Pricing Rules',
+      path: '/pricing-rules',
+      component: () => import('@/views/dashboard/ServicePricing/ServicePricing.vue')
     },
     {
       name: 'Document Requirements',

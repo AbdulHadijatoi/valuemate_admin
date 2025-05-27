@@ -4,22 +4,26 @@ import { fetchWrapper } from '@/utils/helpers/fetch-wrapper';
 import { successMessage } from '@/utils/helpers/messages';
 
 export default {
-  
+  props: {
+    selectedRow: {
+      type: Object,
+      required: true,
+    }
+  },
+
   data() {
     return {
       loading: false,
       form: [],
-      file: null,
     }
   },
 
   methods: {
-    async saveData() {
+    async updateData() {
       this.loading = true;
       try {
-        const responseData = await fetchWrapper.post(`${base_url}/admin/property-types/create`, { 
+        const responseData = await fetchWrapper.post(`${base_url}/admin/service-pricing/update/${this.form.id}`, { 
           ...this.form,
-          file: this.file
         });
         successMessage(responseData.message);
         this.$emit('close');
@@ -31,13 +35,10 @@ export default {
       }
     },
 
-    handleFileUpload(e) {
-      this.file = e.target.files[0];
-    }
   },
 
   mounted() {
-    //
+    this.form = { ...this.selectedRow };
   }
 }
 </script>
@@ -46,19 +47,18 @@ export default {
   <v-row>
     <v-col cols="12" md="12">
       <v-card elevation="0">
-        <v-card-title>Create Property Type</v-card-title>
+        <v-card-title>Edit Pricing Rule - #{{ selectedRow.id }}</v-card-title>
         <v-card-text>
-          <v-form @submit.prevent="saveData">
+          <v-form @submit.prevent="updateData">
             <v-row>
-              
 
               <v-col cols="12">
-                <v-text-field v-model="form.name" label="Name" required />
+                <v-text-field v-model="form.price" label="Price" required />
               </v-col>
 
               <v-col cols="12" class="text-right">
-                <v-btn :disabled="loading" color="primary" type="submit">
-                  Save
+                <v-btn size="x-large" :disabled="loading" color="primary" type="submit">
+                  Update
                 </v-btn>
               </v-col>
             </v-row>
