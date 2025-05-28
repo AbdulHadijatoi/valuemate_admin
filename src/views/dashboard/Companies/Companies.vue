@@ -119,6 +119,7 @@ export default {
             const responseData = await fetchWrapper.post(`${base_url}/admin/companies/delete/${this.selectedRow.id}`, { });
             successMessage(responseData.message);
             this.deleteDialog = false;
+            this.getData();
           } catch (error) {
             console.error("Error during fetch:", error);
           } finally {
@@ -257,14 +258,14 @@ export default {
   <!-- Add dialog to update data -->
   <v-dialog v-model="editDialog" max-width="800px">
     <v-card>
-      <edit-company :company="selectedRow" @close="editDialog = false"/>
+      <edit-company @getData="getData()" :company="selectedRow" @close="editDialog = false"/>
     </v-card>
   </v-dialog>
   
   <!-- Add dialog to create data -->
   <v-dialog v-model="createDialog" max-width="800px">
     <v-card>
-      <create-company @close="createDialog = false"/>
+      <create-company @getData="getData()" @close="createDialog = false"/>
     </v-card>
   </v-dialog>
 

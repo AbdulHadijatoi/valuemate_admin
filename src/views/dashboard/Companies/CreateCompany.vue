@@ -23,6 +23,7 @@ export default {
         });
         successMessage(responseData.message);
         this.$emit('close');
+        this.$emit('getData');
       } catch (error) {
         console.error("Error during fetch:", error);
       } finally {
