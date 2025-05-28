@@ -83,7 +83,7 @@ export default {
           this.loading = true;
           try {
             const responseData = await fetchWrapper.post(`${base_url}/constants`, {});
-            console.log("Response Data:", responseData);
+            
             if (responseData && responseData.data) {
               this.constants = responseData.data;
             }
@@ -144,7 +144,7 @@ export default {
         deleteRow(item) {
           this.selectedRow = item;
           this.deleteDialog = true;
-          console.log("Selected Row for Deletion:", this.selectedRow);
+          
         },
 
         async deleteData(){
@@ -218,7 +218,7 @@ export default {
             </v-col>
             
             <v-col cols="12" md="4">
-              <VueDatePicker v-model="dateRange" @closed="getData" range max-range="30" placeholder="Filter by Create Date" :clearable="false" :enable-time-picker="true"/>
+              <VueDatePicker v-model="dateRange" @closed="getData" range placeholder="Filter by Create Date" :clearable="true" :enable-time-picker="true"/>
             </v-col>
           </v-row>
 

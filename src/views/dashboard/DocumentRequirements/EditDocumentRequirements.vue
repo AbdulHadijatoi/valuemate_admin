@@ -59,7 +59,7 @@ export default {
               </v-col>
 
               <v-col cols="12" class="text-right">
-                <v-btn size="x-large" :disabled="loading" color="primary" type="submit">
+                <v-btn elevation="0" size="x-large" :disabled="loading" color="primary" type="submit">
                   Update
                 </v-btn>
               </v-col>

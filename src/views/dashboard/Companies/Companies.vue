@@ -56,7 +56,7 @@ export default {
               to_date: this.dateRange ? this.formatDate(this.dateRange[1]) : null,
               search_keyword: this.search,
             });
-            console.log("Response Data:", responseData);
+            
             if (responseData && responseData.data) {
               this.data = responseData.data;
               this.totalItems = responseData.total;
@@ -110,7 +110,7 @@ export default {
         deleteRow(item) {
           this.selectedRow = item;
           this.deleteDialog = true;
-          console.log("Selected Row for Deletion:", this.selectedRow);
+          
         },
 
         async deleteData(){
@@ -183,7 +183,7 @@ export default {
             </v-col>
             
             <v-col cols="12" md="4">
-              <VueDatePicker v-model="dateRange" @closed="getData" range max-range="30" placeholder="Filter by Create Date" :clearable="false" :enable-time-picker="true"/>
+              <VueDatePicker v-model="dateRange" @closed="getData" range placeholder="Filter by Create Date" :clearable="true" :enable-time-picker="true"/>
             </v-col>
           </v-row>
 
@@ -202,7 +202,7 @@ export default {
             </template>
             
             <template v-slot:item.description="{ item }">
-              {{ item.description.length > 150 ? item.description.slice(0, 20) + '...' : item.description }}
+              {{ item.description.length > 21 ? item.description.slice(0, 20) + '...' : item.description }}
             </template>
 
             

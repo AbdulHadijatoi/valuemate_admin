@@ -29,16 +29,9 @@ const DashboardRoutes = {
       component: () => import('@/views/dashboard/Dashboard.vue')
     },
     {
-      name: 'Chats',
-      path: '/chats',
-      // component: () => import('@/views/dashboard/Chats/Chats.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
-    },
-    {
       name: 'Users',
       path: '/users',
-      // component: () => import('@/views/dashboard/Users/Users.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      component: () => import('@/views/dashboard/Users/Users.vue')
     },
     {
       name: 'Locations',
@@ -48,20 +41,14 @@ const DashboardRoutes = {
     {
       name: 'Banner Ads',
       path: '/banner-ads',
-      // component: () => import('@/views/dashboard/BannerAds/BannerAds.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      component: () => import('@/views/dashboard/Banners/Banners.vue')
     },
     {
       name: 'Companies',
       path: '/companies',
       component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
-    {
-      name: 'Settings',
-      path: '/settings',
-      // component: () => import('@/views/dashboard/Settings/Settings.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
-    },
+    
     {
       name: 'Property Types',
       path: '/property-types',
@@ -96,6 +83,17 @@ const DashboardRoutes = {
       name: 'Payments',
       path: '/payments',
       // component: () => import('@/views/dashboard/Payments/Payments.vue')
+      component: () => import('@/views/dashboard/Companies/Companies.vue')
+    },
+    {
+      name: 'Settings',
+      path: '/settings',
+      component: () => import('@/views/dashboard/Settings/Settings.vue')
+    },
+    {
+      name: 'Chats',
+      path: '/chats',
+      // component: () => import('@/views/dashboard/Chats/Chats.vue')
       component: () => import('@/views/dashboard/Companies/Companies.vue')
     },
     

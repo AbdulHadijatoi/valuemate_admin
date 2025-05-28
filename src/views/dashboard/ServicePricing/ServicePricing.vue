@@ -99,7 +99,7 @@ export default {
         deleteRow(item) {
           this.selectedRow = item;
           this.deleteDialog = true;
-          console.log("Selected Row for Deletion:", this.selectedRow);
+          
         },
 
         async deleteData(){

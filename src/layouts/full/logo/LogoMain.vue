@@ -14,7 +14,7 @@ const getLogo = async () => {
     });
 
     if (responseData && responseData.data) {
-      logo.value = responseData.data?domain + responseData.data : '';
+      logo.value = responseData.data? responseData.data : '';
     }
   } catch (error) {
     console.error("Error during fetch:", error);

@@ -5,7 +5,7 @@ import { successMessage } from '@/utils/helpers/messages';
 
 export default {
   props: {
-    company: {
+    selectedRow: {
       type: Object,
       required: true,
     }
@@ -15,7 +15,6 @@ export default {
     return {
       loading: false,
       form: [],
-      file: null,
     }
   },
 
@@ -23,12 +22,17 @@ export default {
     async updateData() {
       this.loading = true;
       try {
-        const responseData = await fetchWrapper.post(`${base_url}/admin/companies/update/${this.form.id}`, { 
-          ...this.form,
-          file: this.file
+        const responseData = await fetchWrapper.post(`${base_url}/admin/users/update/${this.form.id}`, { 
+          first_name: this.form.first_name,
+          last_name: this.form.last_name,
+          email: this.form.email,
+          phone: this.form.phone,
+          password: this.form.password??null,
+          password_confirmation: this.form.password??null
         });
         successMessage(responseData.message);
         this.$emit('close');
+        this.$emit('getData');
       } catch (error) {
         console.error("Error during fetch:", error);
       } finally {
@@ -36,13 +40,10 @@ export default {
       }
     },
 
-    handleFileUpload(e) {
-      this.file = e.target.files[0];
-    }
   },
 
   mounted() {
-    this.form = { ...this.company };
+    this.form = { ...this.selectedRow };
   }
 }
 </script>
@@ -51,82 +52,54 @@ export default {
   <v-row>
     <v-col cols="12" md="12">
       <v-card elevation="0">
-        <v-card-title>Edit Company - {{ company.name }}</v-card-title>
+        <v-card-title>Edit User - {{ selectedRow.first_name }} {{ selectedRow.last_name }}</v-card-title>
         <v-card-text>
           <v-form @submit.prevent="updateData">
-            <v-row>
-              <!-- Company Image Upload -->
-              <v-col cols="12">
-                <v-file-input
-                  label="Upload Company Image"
-                  v-model="file"
-                  accept="image/*"
+            <v-row class="mt-4">
+
+              <v-col cols="6">
+                <v-text-field
                   variant="outlined"
                   density="compact"
-                />
-                <div class="mt-2">
-                  <a :href="form.file" target="_blank" v-if="form.file">
-                    <img
-                      :src="form.file"
-                      alt="Company Image"
-                      class="rounded"
-                      style="max-width: 100px; max-height: 100px;"
-                    />
-                  </a>
-                </div>
+                  v-model="form.first_name" 
+                  label="First Name"
+                  required />
               </v-col>
 
               <v-col cols="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.name" label="Name" required />
+                  v-model="form.last_name" 
+                  label="Last Name" />
               </v-col>
-
+              
               <v-col cols="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.address" label="Address" />
+                  v-model="form.email" 
+                  label="Email" />
               </v-col>
-
+              
               <v-col cols="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.phone" label="Phone" />
+                  v-model="form.phone" 
+                  label="Phone" />
               </v-col>
-
+              
               <v-col cols="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.email" label="Email" />
+                  v-model="form.password"
+                  type="password" 
+                  label="Password" />
               </v-col>
 
-              <v-col cols="6">
-                <v-text-field
-                  variant="outlined"
-                  density="compact"
-                  v-model="form.website" label="Website" />
-              </v-col>
-
-              <v-col cols="6">
-                <v-select
-                  variant="outlined"
-                  density="compact"
-                  v-model="form.status"
-                  :items="['active', 'inactive']"
-                  label="Status"
-                />
-              </v-col>
-
-              <v-col cols="12">
-                <v-textarea
-                  variant="outlined"
-                  density="compact"
-                  v-model="form.description" label="Description" />
-              </v-col>
+              
 
               <v-col cols="12" class="text-right">
                 <v-btn elevation="0" size="x-large" :disabled="loading" color="primary" type="submit">

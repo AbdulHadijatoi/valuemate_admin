@@ -46,7 +46,7 @@ export default {
               to_date: this.dateRange ? this.formatDate(this.dateRange[1]) : null,
               search_keyword: this.search,
             });
-            console.log("Response Data:", responseData);
+            
             if (responseData && responseData.data) {
               this.data = responseData.data;
               if(this.property_types.length == 0){
@@ -86,7 +86,7 @@ export default {
         deleteRow(item) {
           this.selectedRow = item;
           this.deleteDialog = true;
-          console.log("Selected Row for Deletion:", this.selectedRow);
+          
         },
 
         async deleteData(){

@@ -25,7 +25,7 @@ const disableDatesBeforeMin = (date) => {
     range
     max-range="30"
     placeholder="Filter by Date"
-    :clearable="false"
+    :clearable="true"
     :enable-time-picker="true"
     :disabled-dates="disableDatesBeforeMin"
   />

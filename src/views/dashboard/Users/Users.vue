@@ -1,33 +1,28 @@
 <script>
 
 import axios from 'axios';
-import { base_url,domain } from '@/utils/config';
+import { base_url } from '@/utils/config';
 import { fetchWrapper } from '@/utils/helpers/fetch-wrapper';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { useAuthStore } from '@/stores/auth';
-import { EditIcon, PlusIcon, TrashIcon } from 'vue-tabler-icons';
-import ViewCompany from './ViewCompany.vue';
-import EditCompany from './EditCompany.vue';
-import CreateCompany from './CreateCompany.vue';
+import ViewUser from './ViewUser.vue';
+import EditUser from './EditUser.vue';
+import CreateUser from './CreateUser.vue';
 import { successMessage } from '@/utils/helpers/messages';
 
 export default {
-    components: { VueDatePicker, ViewCompany, EditCompany, CreateCompany },
+    components: { VueDatePicker, ViewUser, EditUser, CreateUser },
 
     data() {
         return {
             loading: false,
             totalItems: 0,
             headers: [
-                { title: 'Image', key: 'file', filterable: true,},
-                { title: 'Name', key: 'name', filterable: true,},
-                { title: 'Address', key: 'address', filterable: true,},
-                { title: 'Phone', key: 'phone', filterable: true,},
+                { title: 'First Name', key: 'first_name', filterable: true,},
+                { title: 'Last Name', key: 'last_name', filterable: true,},
                 { title: 'Email', key: 'email', filterable: true,},
-                { title: 'Website', key: 'website', filterable: true,},
-                { title: 'Status', key: 'status', filterable: true,},
-                { title: 'Description', key: 'description', filterable: true,},
+                { title: 'Phone', key: 'phone', filterable: true,},
                 { title: 'Created Date', key: 'created_at_date', filterable: true,},
                 { title: 'Created Time', key: 'created_at_time', filterable: true,},
                 { title: 'Action', key: 'actions', filterable: false, },
@@ -49,14 +44,14 @@ export default {
         async getData() {
           this.loading = true;
           try {
-            const responseData = await fetchWrapper.post(`${base_url}/admin/companies`, { 
+            const responseData = await fetchWrapper.post(`${base_url}/admin/users`, { 
               perPage: this.perPage,
               page: this.page,
               from_date: this.dateRange ? this.formatDate(this.dateRange[0]) : null,
               to_date: this.dateRange ? this.formatDate(this.dateRange[1]) : null,
               search_keyword: this.search,
             });
-            console.log("Response Data:", responseData);
+            
             if (responseData && responseData.data) {
               this.data = responseData.data;
               this.totalItems = responseData.total;
@@ -71,7 +66,7 @@ export default {
         download() {
           const { token } = useAuthStore();
             this.loading = true;
-            axios.post(`${base_url}/admin/companies/export`, {
+            axios.post(`${base_url}/admin/users/export`, {
               from_date: this.dateRange ? this.formatDate(this.dateRange[0]) : null,
               to_date: this.dateRange ? this.formatDate(this.dateRange[1]) : null,
               search_keyword: this.search,
@@ -85,7 +80,7 @@ export default {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', `companies_${new Date().getTime()}.xlsx`);
+                link.setAttribute('download', `users_${new Date().getTime()}.xlsx`);
 
                 document.body.appendChild(link);
                 link.click();
@@ -110,14 +105,15 @@ export default {
         deleteRow(item) {
           this.selectedRow = item;
           this.deleteDialog = true;
-          console.log("Selected Row for Deletion:", this.selectedRow);
+          
         },
 
         async deleteData(){
           this.loading = true;
           try {
-            const responseData = await fetchWrapper.post(`${base_url}/admin/companies/delete/${this.selectedRow.id}`, { });
+            const responseData = await fetchWrapper.post(`${base_url}/admin/users/delete/${this.selectedRow.id}`, { });
             successMessage(responseData.message);
+            this.getData();
             this.deleteDialog = false;
           } catch (error) {
             console.error("Error during fetch:", error);
@@ -157,10 +153,10 @@ export default {
       <v-card variant="flat">
         <v-card-item>
           <div class="d-sm-flex align-center justify-space-between">
-            <v-card-title>Companies</v-card-title>
+            <v-card-title>Users</v-card-title>
             <div>
               <v-btn color="secondary" @click="download()" :disabled="loading || !data || data.length == 0" class="mr-2"><DownloadIcon size="20" class="mr-2"/>Download Excel</v-btn>
-              <v-btn color="accent" @click="create()"><PlusIcon size="20" class="mr-2"/>Add New Company</v-btn>
+              <v-btn color="accent" @click="create()"><PlusIcon size="20" class="mr-2"/>Add New User</v-btn>
             </div>
           </div>
         </v-card-item>
@@ -183,17 +179,11 @@ export default {
             </v-col>
             
             <v-col cols="12" md="4">
-              <VueDatePicker v-model="dateRange" @closed="getData" range max-range="30" placeholder="Filter by Create Date" :clearable="false" :enable-time-picker="true"/>
+              <VueDatePicker v-model="dateRange" @closed="getData" range placeholder="Filter by Create Date" :clearable="true" :enable-time-picker="true"/>
             </v-col>
           </v-row>
 
           <v-data-table-server @update:options="getData" density="compact" v-model:page="page" :items-length="totalItems" v-model:items-per-page="perPage" :loading="loading" :headers="headers" :items="data" class="elevation-0">
-
-            <template v-slot:item.file="{ item }">
-              <v-avatar size="40" class="mr-2">
-                <img :src="item.file" alt="Company Logo">
-              </v-avatar>
-            </template>
 
             <template v-slot:item.status="{ item }">
               <v-chip :color="item.status == 'active' ? 'primary' : 'error'" rounded="pill" class="mr-2 py-5">
@@ -247,7 +237,7 @@ export default {
   <!-- Add dialog to view data -->
   <v-dialog v-model="viewDialog" max-width="800px">
     <v-card>
-      <view-company :company="selectedRow" @close="viewDialog = false"  />
+      <view-user :selectedRow="selectedRow" @close="viewDialog = false"  />
       <v-card-actions>
         <v-btn color="primary" @click="viewDialog = false">Dismiss</v-btn>
       </v-card-actions>
@@ -257,21 +247,21 @@ export default {
   <!-- Add dialog to update data -->
   <v-dialog v-model="editDialog" max-width="800px">
     <v-card>
-      <edit-company :company="selectedRow" @close="editDialog = false"/>
+      <edit-user @getData="getData()" :selectedRow="selectedRow" @close="editDialog = false"/>
     </v-card>
   </v-dialog>
   
   <!-- Add dialog to create data -->
   <v-dialog v-model="createDialog" max-width="800px">
     <v-card>
-      <create-company @close="createDialog = false"/>
+      <create-user @getData="getData()" @close="createDialog = false"/>
     </v-card>
   </v-dialog>
 
   <!-- add delete confirmation dialog -->
   <v-dialog v-model="deleteDialog" max-width="600px">
     <v-card>
-      <v-card-title class="headline">Are you sure you want to delete this company?</v-card-title>
+      <v-card-title class="headline">Are you sure you want to delete this user?</v-card-title>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="error" @click="deleteDialog = false">Cancel</v-btn>
