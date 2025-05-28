@@ -224,10 +224,16 @@ export default {
 
           <v-data-table-server @update:options="getData" density="compact" v-model:page="page" :items-length="totalItems" v-model:items-per-page="perPage" :loading="loading" :headers="headers" :items="data" class="elevation-0">
 
-            <template v-slot:item.file="{ item }">
-              <v-avatar size="40" class="mr-2">
-                <img :src="item.file" alt="Company Logo">
-              </v-avatar>
+            <template v-slot:item.company_name="{ item }">
+              <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
+                {{ item.company_name }}
+              </v-chip>
+            </template>
+
+            <template v-slot:item.total_amount="{ item }">
+              <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
+                {{ item.total_amount }} OMR
+              </v-chip>
             </template>
 
             <template v-slot:item.status="{ item }">

@@ -156,6 +156,12 @@ export default {
 
           <v-data-table-server @update:options="getData" density="compact" v-model:page="page" :items-length="totalItems" v-model:items-per-page="perPage" :loading="loading" :headers="headers" :items="data" class="elevation-0">
 
+            <template v-slot:item.title="{ item }">
+              <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
+                {{ item.title }}
+              </v-chip>
+            </template>
+
             <template v-slot:item.image_url="{ item }">
                 <a style="text-decoration:none; color: darkblue; font-style:italic" :href="item.image_url" target="_blank" rel="noopener noreferrer">View Image</a>
             </template>

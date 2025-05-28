@@ -133,6 +133,12 @@ export default {
 
           <v-data-table density="compact" :loading="loading" :headers="headers" :items="data" class="elevation-0">
             
+            <template v-slot:item.name="{ item }">
+              <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
+                {{ item.name }}
+              </v-chip>
+            </template>
+
             <template v-slot:item.map_url="{ item }">
                 <a style="text-decoration:none; color: darkblue; font-style:italic" :href="item.map_url" target="_blank" rel="noopener noreferrer">View on Map</a>
             </template>

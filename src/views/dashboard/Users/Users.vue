@@ -185,6 +185,12 @@ export default {
 
           <v-data-table-server @update:options="getData" density="compact" v-model:page="page" :items-length="totalItems" v-model:items-per-page="perPage" :loading="loading" :headers="headers" :items="data" class="elevation-0">
 
+            <template v-slot:item.first_name="{ item }">
+              <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
+                {{ item.first_name }}
+              </v-chip>
+            </template>
+
             <template v-slot:item.status="{ item }">
               <v-chip :color="item.status == 'active' ? 'primary' : 'error'" rounded="pill" class="mr-2 py-5">
                 {{ item.status }}

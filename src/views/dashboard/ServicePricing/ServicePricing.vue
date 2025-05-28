@@ -277,7 +277,7 @@ export default {
           <v-data-table density="compact" :loading="loading" :headers="headers" :items="data" class="elevation-0">
 
             <template v-slot:item.price="{ item }">
-              <v-chip color="error" class="mr-2 py-5 rounded-0" >
+              <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
                 {{ item.price }} OMR
               </v-chip>
             </template>

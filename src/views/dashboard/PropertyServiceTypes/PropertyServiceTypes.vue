@@ -164,7 +164,12 @@ export default {
           </v-row>
 
           <v-data-table density="compact" :loading="loading" :headers="headers" :items="property_service_types" class="elevation-0">
-            
+            <template v-slot:item.service_type_name="{ item }">
+              <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
+                {{ item.service_type_name }}
+              </v-chip>
+            </template>
+
             <template v-slot:item.actions="{ item }">
               <div class="d-flex align-center">
                 <v-tooltip location="start">
