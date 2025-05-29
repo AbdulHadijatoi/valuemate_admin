@@ -9,7 +9,7 @@ export default {
       type: Object,
       required: true,
     },
-    all_service_types: {
+    service_types: {
       type: Object,
       required: true,
     }
@@ -18,7 +18,6 @@ export default {
     return {
       loading: false,
       form: [],
-      service_types: [],
       filter: {
         property_type_id: null,
         service_type_id: null
@@ -42,28 +41,6 @@ export default {
         console.error("Error during fetch:", error);
       } finally {
         this.loading = false;
-      }
-    },
-
-    filterServiceTypes() {
-      this.filter.service_type_id = null; // Clear the selected service type
-      this.service_types = [];
-
-      const propertyTypeId = this.filter.property_type_id;
-
-      if (propertyTypeId) {
-        // Filter all matching service groups
-        const matchedServices = this.all_service_types.filter(
-          item => item.property_type_id === propertyTypeId
-        );
-
-        // Flatten and format all service types
-        this.service_types = matchedServices.flatMap(serviceGroup =>
-          serviceGroup.services.map(service => ({
-            id: service.service_type_id,
-            name: service.service_type_name
-          }))
-        );
       }
     },
   },
@@ -93,7 +70,6 @@ export default {
                   label="Filter by Property Type"
                   item-title="name"
                   item-value="id"
-                  @update:model-value="filterServiceTypes()"
                 />
               </v-col>
               <v-col cols="12" md="6">

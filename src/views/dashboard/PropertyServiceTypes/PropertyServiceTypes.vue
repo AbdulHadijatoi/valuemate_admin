@@ -14,6 +14,7 @@ export default {
             loading: false,
             headers: [
                 { title: '#', key: 'id', filterable: true,},
+                { title: 'Property Type', key: 'property_type_name', filterable: true,},
                 { title: 'Service Type', key: 'service_type_name', filterable: true,},
                 { title: 'Created Date', key: 'created_at_date', filterable: true,},
                 { title: 'Created Time', key: 'created_at_time', filterable: true,},
@@ -22,10 +23,6 @@ export default {
             data: [],
             property_types: [],
             service_types: [],
-            property_service_types: [],
-            perPage: 10,
-            page: 1,
-            search: null,
             selectedRow: null,
             createDialog: false,
             deleteDialog: false,
@@ -36,29 +33,16 @@ export default {
     },
 
     methods: {
-        async getData() {
+        async getConstants() {
           this.loading = true;
           try {
-            const responseData = await fetchWrapper.post(`${base_url}/admin/property-service-types`, { 
-              perPage: this.perPage,
-              page: this.page,
-              from_date: this.dateRange ? this.formatDate(this.dateRange[0]) : null,
-              to_date: this.dateRange ? this.formatDate(this.dateRange[1]) : null,
-              search_keyword: this.search,
-            });
-            
+            const responseData = await fetchWrapper.post(`${base_url}/admin/constants`, { });
             if (responseData && responseData.data) {
-              this.data = responseData.data;
-              if(this.property_types.length == 0){
-                this.property_types = responseData.property_types;
-              }
-              if(!this.service_types.length == 0){
-                this.service_types = responseData.service_types;
-              }
-              if(!this.filter.property_type_id){
-                this.filter.property_type_id = this.property_types[0]? this.property_types[0].id:null;
-              }
-              this.filterServiceTypes();
+
+              const data = responseData.data;
+              this.service_types = data.service_types;
+              this.property_types = data.property_types;
+
             }
           } catch (error) {
             console.error("Error during fetch:", error);
@@ -67,17 +51,19 @@ export default {
             this.loading = false;
           }
         },
-       
-        filterServiceTypes() {
-          const propertyTypeId = this.filter.property_type_id;
-          console.log("propertyTypeId ", propertyTypeId)
-          if (propertyTypeId) {
-            const matched = this.data.find(
-              service => service.property_type_id === propertyTypeId
-            );
-            this.property_service_types = matched ? matched.services : [];
-          } else {
-            this.service_types = [];
+        async getData() {
+          this.loading = true;
+          try {
+            const responseData = await fetchWrapper.post(`${base_url}/admin/property-service-types`, { });
+            
+            if (responseData && responseData.data) {
+              this.data = responseData.data;
+            }
+          } catch (error) {
+            console.error("Error during fetch:", error);
+          } finally {
+            
+            this.loading = false;
           }
         },
         create() {
@@ -114,6 +100,7 @@ export default {
         //
     },
     mounted() {
+      this.getConstants();
       this.getData();
     },
 }
@@ -144,7 +131,6 @@ export default {
                 label="Filter by Property Type"
                 item-title="name"
                 item-value="id"
-                @update:model-value="filterServiceTypes()"
               />
             </v-col>
 
@@ -163,10 +149,10 @@ export default {
             </v-col> -->
           </v-row>
 
-          <v-data-table density="compact" :loading="loading" :headers="headers" :items="property_service_types" class="elevation-0">
-            <template v-slot:item.service_type_name="{ item }">
+          <v-data-table density="compact" :loading="loading" :headers="headers" :items="data" class="elevation-0">
+            <template v-slot:item.property_type_name="{ item }">
               <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
-                {{ item.service_type_name }}
+                {{ item.property_type_name }}
               </v-chip>
             </template>
 

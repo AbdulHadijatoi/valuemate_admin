@@ -127,7 +127,7 @@ export default {
               </v-row>
             </v-col>
 
-            <v-col cols="12">
+            <!-- <v-col cols="12">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="2">
                   <span class="bold-text">Target Link</span> 
@@ -136,9 +136,9 @@ export default {
                   <span class="mx-2">{{selectedRow.link}}</span>
                 </v-col>
               </v-row>
-            </v-col>
+            </v-col> -->
 
-            <v-col cols="12" style="background-color: rgba(0,0,0,0.1);">
+            <v-col cols="12">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="2">
                   <span class="bold-text">Description</span> 

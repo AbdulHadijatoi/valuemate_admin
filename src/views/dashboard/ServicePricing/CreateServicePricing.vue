@@ -54,28 +54,6 @@ export default {
         this.loading = false;
       }
     },
-
-    filterServiceTypes() {
-      this.filter.service_type_id = null; // Clear the selected service type
-      this.filtered_service_types = [];
-
-      const propertyTypeId = this.filter.property_type_id;
-
-      if (propertyTypeId) {
-        // Filter all matching service groups
-        const matchedServices = this.service_types.filter(
-          item => item.property_type_id === propertyTypeId
-        );
-
-        // Flatten and format all service types
-        this.filtered_service_types = matchedServices.flatMap(serviceGroup =>
-          serviceGroup.services.map(service => ({
-            id: service.service_type_id,
-            name: service.service_type_name
-          }))
-        );
-      }
-    },
   },
 
   mounted() {
@@ -104,7 +82,6 @@ export default {
                 label="Property Type"
                 item-title="name"
                 item-value="id"
-                @update:model-value="filterServiceTypes()"
               />
             </v-col>
             <v-col cols="12" md="4">
@@ -113,7 +90,7 @@ export default {
                 chips hide-no-data
                 variant="outlined"
                 density="compact"
-                :items="filtered_service_types"
+                :items="service_types"
                 label="Service Type"
                 item-title="name"
                 item-value="id"

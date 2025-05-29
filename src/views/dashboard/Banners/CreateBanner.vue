@@ -87,13 +87,13 @@ export default {
                   required />
               </v-col>
 
-              <v-col cols="6">
+              <!-- <v-col cols="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
                   v-model="form.link" 
                   label="Target Link" />
-              </v-col>
+              </v-col> -->
 
               <v-col cols="6">
                 <v-select

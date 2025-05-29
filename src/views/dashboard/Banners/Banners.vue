@@ -21,7 +21,7 @@ export default {
                 { title: 'Title', key: 'title', filterable: true,},
                 { title: 'Description', key: 'description', filterable: true,},
                 { title: 'Image URL', key: 'image_url', filterable: true,},
-                { title: 'Target Link', key: 'link', filterable: true,},
+                // { title: 'Target Link', key: 'link', filterable: true,},
                 { title: 'Ad Type', key: 'ad_type', filterable: true,},
                 { title: 'Start Date', key: 'start_date', filterable: true,},
                 { title: 'End Date', key: 'end_date', filterable: true,},

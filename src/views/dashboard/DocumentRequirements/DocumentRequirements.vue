@@ -32,7 +32,6 @@ export default {
             editDialog: false,
             deleteDialog: false,
             property_types: [],
-            all_service_types: [],
             service_types: [],
             filter: {
               property_type_id: null,
@@ -97,7 +96,7 @@ export default {
             if (responseData && responseData.data) {
 
               const data = responseData.data;
-              this.all_service_types = data.service_types;
+              this.service_types = data.service_types;
               this.property_types = data.property_types;
 
             }
@@ -108,30 +107,6 @@ export default {
             this.loading = false;
           }
         },
-
-        filterServiceTypes() {
-          this.filter.service_type_id = null; // Clear the selected service type
-          this.service_types = [];
-
-          const propertyTypeId = this.filter.property_type_id;
-
-          if (propertyTypeId) {
-            // Filter all matching service groups
-            const matchedServices = this.all_service_types.filter(
-              item => item.property_type_id === propertyTypeId
-            );
-
-            // Flatten and format all service types
-            this.service_types = matchedServices.flatMap(serviceGroup =>
-              serviceGroup.services.map(service => ({
-                id: service.service_type_id,
-                name: service.service_type_name
-              }))
-            );
-          }
-        },
-
-
 
         async deleteData(){
           this.loading = true;
@@ -188,7 +163,6 @@ export default {
                 label="Filter by Property Type"
                 item-title="name"
                 item-value="id"
-                @update:model-value="filterServiceTypes()"
               />
             </v-col>
             <v-col cols="12" md="4">
@@ -275,7 +249,7 @@ export default {
   <!-- Add dialog to create data -->
   <v-dialog v-model="createDialog" max-width="800px">
     <v-card>
-      <create-document-requirements @filterData="filterData()" :property_types="property_types" :all_service_types="all_service_types" @getData="getData()" @close="createDialog = false"/>
+      <create-document-requirements @filterData="filterData()" :property_types="property_types" :service_types="service_types" @getData="getData()" @close="createDialog = false"/>
     </v-card>
   </v-dialog>
 
