@@ -58,12 +58,13 @@ export default {
             </v-col>
 
             <v-col cols="12" style="background-color: rgba(0,0,0,0.1);">
-              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+              <v-row variant="flat" class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="12">
-                  <span class="mx-2">Description: {{selectedRow.description}}</span>
+                  <div class="mx-2" v-html="selectedRow.description"></div>
                 </v-col>
               </v-row>
             </v-col>
+
 
           </v-row>
           
