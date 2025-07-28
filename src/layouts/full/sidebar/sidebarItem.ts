@@ -50,6 +50,12 @@ const allMenuItems: menu[] = [
     icon: ListIcon,
     to: '/companies',
   },
+  
+  {
+    title: 'Guidelines',
+    icon: ListIcon,
+    to: '/guidelines',
+  },
 
   {
     title: 'Property Types',

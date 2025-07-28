@@ -50,6 +50,12 @@ const DashboardRoutes = {
     },
     
     {
+      name: 'Guidelines',
+      path: '/guidelines',
+      component: () => import('@/views/dashboard/Guidelines/Guidelines.vue')
+    },
+    
+    {
       name: 'Property Types',
       path: '/property-types',
       component: () => import('@/views/dashboard/PropertyTypes/PropertyTypes.vue')
@@ -82,8 +88,7 @@ const DashboardRoutes = {
     {
       name: 'Payments',
       path: '/payments',
-      // component: () => import('@/views/dashboard/Payments/Payments.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      component: () => import('@/views/dashboard/Payments/Payments.vue')
     },
     {
       name: 'Settings',
