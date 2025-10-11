@@ -41,8 +41,16 @@ function request(method: Method) {
     };
 
     if (body) {
-      config.headers = { ...config.headers, 'Content-Type': 'multipart/form-data' };
-      config.data = body;
+        // If body is FormData, let axios set the Content-Type with proper boundary.
+        if (body instanceof FormData) {
+          config.data = body;
+          // ensure we don't force Content-Type header which would break boundary handling
+          config.headers = { ...(config.headers || {}) };
+        } else {
+          // For JSON payloads, set the application/json header and stringify body
+          config.headers = { ...(config.headers || {}), 'Content-Type': 'application/json' };
+          config.data = body;
+        }
     }
 
     try {

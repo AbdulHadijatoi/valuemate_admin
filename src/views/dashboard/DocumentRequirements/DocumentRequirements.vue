@@ -20,6 +20,7 @@ export default {
                 { title: 'Property Type', key: 'property_type_name', filterable: true,},
                 { title: 'Service Type', key: 'service_type_name', filterable: true,},
                 { title: 'Document Name', key: 'document_name', filterable: true,},
+                { title: 'Type', key: 'type', filterable: true,},
                 { title: 'Created Date', key: 'created_at_date', filterable: true,},
                 { title: 'Created Time', key: 'created_at_time', filterable: true,},
                 { title: 'Action', key: 'actions', filterable: false, },

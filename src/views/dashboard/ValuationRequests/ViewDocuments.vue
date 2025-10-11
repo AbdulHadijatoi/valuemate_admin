@@ -62,10 +62,16 @@ export default {
           </v-alert>
 
           <v-row v-else dense>
-            <v-col cols="auto" v-for="doc in documents" :key="doc.id">
-              <v-btn elevation="0" size="x-large" color="primary" :href="doc.full_path" download>
+            <v-col cols="6" v-for="doc in documents" :key="doc.id">
+              <v-btn v-if="doc.is_file" elevation="0" size="x-large" :href="doc.full_path" download>
                 <DownloadIcon size="20"/> {{ doc.document_name }}
               </v-btn>
+              <v-text-field v-else
+                  v-model="doc.text_value"
+                  :label="doc.document_name"
+                  density="compact"
+                  readonly
+                />
             </v-col>
           </v-row>
         </v-card-text>

@@ -256,7 +256,7 @@ export default {
                       <UploadIcon size="20"/>
                     </v-chip>
                   </template>
-                  <span>Upload Documents</span>
+                  <span>Add Documents</span>
                 </v-tooltip>
 
                 <v-tooltip v-if="item.has_documents" location="start">

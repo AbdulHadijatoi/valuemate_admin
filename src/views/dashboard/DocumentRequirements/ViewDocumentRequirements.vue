@@ -39,7 +39,7 @@ export default {
       <v-card variant="flat">
         <v-card-item>
           <div class="d-sm-flex align-center justify-space-between">
-            <v-card-title>Document Requirement #{{selectedRow.id}}</v-card-title>
+            <v-card-title>Document Requirement #{{selectedRow.id}} {{ selectedRow.is_file?'(requires FILE value)':'(requires TEXT value)' }}</v-card-title>
           </div>
         </v-card-item>
         <v-divider></v-divider>
@@ -49,10 +49,10 @@ export default {
             
             <v-col cols="12">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
-                <v-col cols="2">
+                <v-col cols="4">
                   <span class="bold-text">Document Name</span> 
                 </v-col>
-                <v-col cols="10">
+                <v-col cols="8">
                   <span class="mx-2">{{selectedRow.document_name}}</span>
                 </v-col>
               </v-row>

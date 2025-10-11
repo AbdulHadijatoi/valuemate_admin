@@ -23,7 +23,8 @@ export default {
     const docs = this.selectedRow.required_documents || this.selectedRow.requiredDocuments || [];
     this.form = docs.map(doc => ({
       document_requirement_id: doc.id,
-      document_file: null
+      document_file: null,
+      document_text_value: null
     }));
   },
 
@@ -35,9 +36,24 @@ export default {
         const formData = new FormData();
         formData.append('valuation_request_id', this.selectedRow.id);
 
-        this.form.forEach(entry => {
-          formData.append('document_requirement_id[]', entry.document_requirement_id);
-          formData.append('document_file[]', entry.document_file);
+        // Use explicit indexes to guarantee alignment server-side
+        this.form.forEach((entry, idx) => {
+          formData.append(`document_requirement_id[${idx}]`, entry.document_requirement_id);
+
+          // v-file-input may return a File or an array; normalize to a single File or null
+          const fileValue = Array.isArray(entry.document_file)
+            ? entry.document_file[0] || null
+            : entry.document_file || null;
+
+          if (fileValue instanceof File) {
+            formData.append(`document_file[${idx}]`, fileValue);
+          } else {
+            // append empty string so indexes remain aligned
+            formData.append(`document_file[${idx}]`, '');
+          }
+
+          // Always append text value as string (empty string if null/undefined)
+          formData.append(`document_text_value[${idx}]`, entry.document_text_value ?? '');
         });
 
         const responseData = await fetchWrapper.post(`${base_url}/admin/valuation-requests/upload-documents`,formData);
@@ -78,11 +94,16 @@ export default {
 
           <v-row v-for="(entry, index) in form" :key="index" class="mb-4">
             <v-col cols="12">
-              <v-file-input
+              <v-file-input v-if="selectedRow.required_documents[index].is_file"
                 :label="'Upload ' + selectedRow.required_documents[index].document_name"
                 v-model="entry.document_file"
                 show-size
               />
+              <v-text-field v-else
+                  v-model="entry.document_text_value"
+                  :label="selectedRow.required_documents[index].document_name"
+                  density="compact"
+                />
             </v-col>
           </v-row>
 
