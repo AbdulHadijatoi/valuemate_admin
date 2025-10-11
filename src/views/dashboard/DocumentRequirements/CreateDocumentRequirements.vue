@@ -19,7 +19,6 @@ export default {
       loading: false,
       form: [],
       is_file: true,
-      file: null,
       filter: {
         property_type_id: null,
         service_type_id: null
@@ -32,27 +31,12 @@ export default {
       this.loading = true;
       try {
         const isFileFlag = this.is_file ? 1 : 0;
-
-        // If it's a file, use FormData so files upload correctly
-        let payload;
-        if (this.is_file && this.file) {
-          payload = new FormData();
-          payload.append('document_name', this.form.document_name || '');
-          payload.append('property_type_id', this.filter.property_type_id || '');
-          payload.append('service_type_id', this.filter.service_type_id || '');
-          payload.append('is_file', String(isFileFlag));
-          // file input name expected by backend: 'file' (adjust if backend expects different name)
-          payload.append('file', this.file);
-        } else {
-          payload = {
-            ...this.form,
-            property_type_id: this.filter.property_type_id,
-            service_type_id: this.filter.service_type_id,
-            is_file: isFileFlag
-          };
-        }
-
-        const responseData = await fetchWrapper.post(`${base_url}/admin/document-requirements/create`, payload);
+        const responseData = await fetchWrapper.post(`${base_url}/admin/document-requirements/create`, { 
+          ...this.form,
+          property_type_id: this.filter.property_type_id,
+          service_type_id: this.filter.service_type_id,
+          is_file: isFileFlag
+        });
         successMessage(responseData.message);
         this.$emit('close');
         this.$emit('getData');
@@ -116,15 +100,6 @@ export default {
                   inset
                   color="primary"
                 />
-              </v-col>
-
-              <v-col cols="12" md="8">
-                <div v-if="is_file">
-                  <input type="file" @change="(e) => file = e.target.files[0]" />
-                </div>
-                <div v-else>
-                  <v-text-field density="compact" variant="outlined" v-model="form.text_value" label="Text Value" />
-                </div>
               </v-col>
 
               <v-col cols="12" class="text-right">
