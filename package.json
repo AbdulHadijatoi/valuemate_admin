@@ -11,16 +11,15 @@
     "build-prod": "vue-tsc --noEmit && vite build --base=/vue/free/",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-pattern .gitignore"
+  "lint": "eslint \"src/**/*.{js,ts,vue}\" --fix"
   },
   "dependencies": {
     "@mdi/js": "^7.4.47",
     "@tiptap/starter-kit": "2.3.2",
     "@tiptap/vue-3": "2.3.2",
-    "@tsconfig/node20": "20.1.4",
-    "@typescript-eslint/parser": "^7.8.0",
-    "@vue/composition-api": "^1.7.2",
-    "@vuepic/vue-datepicker": "^10.0.0",
+  "@tsconfig/node20": "20.1.4",
+  "@typescript-eslint/parser": "^7.8.0",
+  "@vuepic/vue-datepicker": "^10.0.0",
     "@vueup/vue-quill": "^1.2.0",
     "apexcharts": "3.49.1",
     "axios": "1.6.8",
