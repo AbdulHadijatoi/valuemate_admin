@@ -60,7 +60,7 @@ export default {
                 <v-text-field v-model="form.document_name" label="Name" required />
               </v-col>
 
-              <v-col cols="12" md="4">
+              <v-col cols="12">
                 <v-switch
                   v-model="is_file"
                   label="Is File (Disable it, if TEXT input needed)"
