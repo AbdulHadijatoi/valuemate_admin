@@ -15,7 +15,7 @@ export default {
     return {
       loading: false,
       form: [],
-      file: null,
+      is_file: true,
     }
   },
 
@@ -23,8 +23,10 @@ export default {
     async updateData() {
       this.loading = true;
       try {
+        const isFileFlag = this.is_file ? 1 : 0;
         const responseData = await fetchWrapper.post(`${base_url}/admin/document-requirements/update/${this.form.id}`, { 
           ...this.form,
+          is_file: isFileFlag
         });
         successMessage(responseData.message);
         this.$emit('close');
@@ -56,6 +58,16 @@ export default {
 
               <v-col cols="12">
                 <v-text-field v-model="form.document_name" label="Name" required />
+              </v-col>
+
+              <v-col cols="12" md="4">
+                <v-switch
+                  v-model="is_file"
+                  label="Is File (Disable it, if TEXT input needed)"
+                  density="compact"
+                  inset
+                  color="primary"
+                />
               </v-col>
 
               <v-col cols="12" class="text-right">

@@ -95,7 +95,7 @@ export default {
               <v-col cols="12" md="4">
                 <v-switch
                   v-model="is_file"
-                  label="Is File"
+                  label="Is File (Disable it, if TEXT input needed)"
                   density="compact"
                   inset
                   color="primary"
