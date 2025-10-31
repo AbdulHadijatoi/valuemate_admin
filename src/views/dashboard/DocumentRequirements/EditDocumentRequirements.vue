@@ -14,8 +14,7 @@ export default {
   data() {
     return {
       loading: false,
-      form: [],
-      is_file: true,
+      form: []
     }
   },
 
@@ -23,10 +22,8 @@ export default {
     async updateData() {
       this.loading = true;
       try {
-        const isFileFlag = this.is_file ? 1 : 0;
         const responseData = await fetchWrapper.post(`${base_url}/admin/document-requirements/update/${this.form.id}`, { 
-          ...this.form,
-          is_file: isFileFlag
+          ...this.form
         });
         successMessage(responseData.message);
         this.$emit('close');
@@ -42,7 +39,12 @@ export default {
   },
 
   mounted() {
-    this.form = { ...this.selectedRow };
+    // this.form = { ...this.selectedRow };
+
+    this.form = { 
+      ...this.selectedRow,
+      is_file: this.selectedRow.is_file == 1 // convert to true/false
+    };
   }
 }
 </script>
@@ -51,7 +53,7 @@ export default {
   <v-row>
     <v-col cols="12" md="12">
       <v-card elevation="0">
-        <v-card-title>Edit Document Requirement - #{{ selectedRow.id }}</v-card-title>
+        <v-card-title>Edit Document Requirement - #{{ form.id }}</v-card-title>
         <v-card-text>
           <v-form @submit.prevent="updateData">
             <v-row>
@@ -62,8 +64,8 @@ export default {
 
               <v-col cols="12">
                 <v-switch
-                  v-model="selectedRow.is_file"
-                  label="Is File (Disable it, if TEXT input needed)"
+                  v-model="form.is_file"
+                  label="Enable for File Upload (Disable for Text Input)"
                   density="compact"
                   inset
                   color="primary"

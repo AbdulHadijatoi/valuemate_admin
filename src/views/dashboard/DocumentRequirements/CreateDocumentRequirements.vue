@@ -95,7 +95,7 @@ export default {
               <v-col cols="12">
                 <v-switch
                   v-model="is_file"
-                  label="Is File (Disable it, if TEXT input needed)"
+                  label="Enable for File Upload (Disable for Text Input)"
                   density="compact"
                   inset
                   color="primary"
