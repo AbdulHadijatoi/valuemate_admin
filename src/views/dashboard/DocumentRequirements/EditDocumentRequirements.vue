@@ -62,7 +62,7 @@ export default {
 
               <v-col cols="12">
                 <v-switch
-                  v-model="is_file"
+                  v-model="selectedRow.is_file"
                   label="Is File (Disable it, if TEXT input needed)"
                   density="compact"
                   inset
