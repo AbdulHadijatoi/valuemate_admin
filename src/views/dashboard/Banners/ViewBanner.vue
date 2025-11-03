@@ -52,10 +52,21 @@ export default {
             <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Title</span> 
+                  <span class="bold-text">Title (English)</span> 
                 </v-col>
                 <v-col cols="8">
                   <span class="mx-2">{{selectedRow.title}}</span>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col cols="6">
+              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+                <v-col cols="4">
+                  <span class="bold-text">Title (Arabic)</span> 
+                </v-col>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.title_ar || '-'}}</span>
                 </v-col>
               </v-row>
             </v-col>
@@ -138,13 +149,24 @@ export default {
               </v-row>
             </v-col> -->
 
-            <v-col cols="12">
+            <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
-                <v-col cols="2">
-                  <span class="bold-text">Description</span> 
+                <v-col cols="4">
+                  <span class="bold-text">Description (English)</span> 
                 </v-col>
-                <v-col cols="10">
-                  <span class="mx-2">{{selectedRow.description}}</span>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.description || '-'}}</span>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col cols="6">
+              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+                <v-col cols="4">
+                  <span class="bold-text">Description (Arabic)</span> 
+                </v-col>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.description_ar || '-'}}</span>
                 </v-col>
               </v-row>
             </v-col>

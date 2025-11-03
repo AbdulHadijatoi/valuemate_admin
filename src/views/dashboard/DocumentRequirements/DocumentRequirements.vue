@@ -19,7 +19,8 @@ export default {
                 { title: '#', key: 'id', filterable: true,},
                 { title: 'Property Type', key: 'property_type_name', filterable: true,},
                 { title: 'Service Type', key: 'service_type_name', filterable: true,},
-                { title: 'Document Name', key: 'document_name', filterable: true,},
+                { title: 'Document Name (EN)', key: 'document_name', filterable: true,},
+                { title: 'Document Name (AR)', key: 'document_name_ar', filterable: true,},
                 { title: 'Type', key: 'type', filterable: true,},
                 { title: 'Created Date', key: 'created_at_date', filterable: true,},
                 { title: 'Created Time', key: 'created_at_time', filterable: true,},
@@ -190,6 +191,13 @@ export default {
               <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
                 {{ item.document_name }}
               </v-chip>
+            </template>
+
+            <template v-slot:item.document_name_ar="{ item }">
+              <v-chip color="secondary" variant="outlined" rounded="pill" class="mr-2" v-if="item.document_name_ar">
+                {{ item.document_name_ar }}
+              </v-chip>
+              <span v-else class="text-grey">-</span>
             </template>
 
             <template v-slot:item.actions="{ item }">

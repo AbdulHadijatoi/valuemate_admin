@@ -16,8 +16,10 @@ export default {
                 { title: '#', key: 'index', filterable: true,},
                 { title: 'Id', key: 'id', filterable: true,},
                 { title: 'Type', key: 'type', filterable: true,},
-                { title: 'Title', key: 'title', filterable: true,},
-                { title: 'Description', key: 'description', filterable: true,},
+                { title: 'Title (EN)', key: 'title', filterable: true,},
+                { title: 'Title (AR)', key: 'title_ar', filterable: true,},
+                { title: 'Description (EN)', key: 'description', filterable: true,},
+                { title: 'Description (AR)', key: 'description_ar', filterable: true,},
                 { title: 'Action', key: 'actions', filterable: false, },
             ],
             data: [],
@@ -84,8 +86,20 @@ export default {
 
           <v-data-table density="compact" :loading="loading" :headers="headers" :items="data" class="elevation-0">
             
+            <template v-slot:item.title="{ item }">
+              {{ item.title }}
+            </template>
+
+            <template v-slot:item.title_ar="{ item }">
+              {{ item.title_ar || '-' }}
+            </template>
+
             <template v-slot:item.description="{ item }">
-              {{ item.description.length > 150 ? item.description.slice(0, 20) + '...' : item.description }}
+              {{ item.description && item.description.length > 150 ? item.description.slice(0, 20) + '...' : item.description || '-' }}
+            </template>
+
+            <template v-slot:item.description_ar="{ item }">
+              {{ item.description_ar && item.description_ar.length > 150 ? item.description_ar.slice(0, 20) + '...' : item.description_ar || '-' }}
             </template>
 
             

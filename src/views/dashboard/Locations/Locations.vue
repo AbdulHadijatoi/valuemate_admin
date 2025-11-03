@@ -18,8 +18,10 @@ export default {
             loading: false,
             totalItems: 0,
             headers: [
-                { title: 'Name', key: 'name', filterable: true,},
-                { title: 'Description', key: 'description', filterable: true,},
+                { title: 'Name (EN)', key: 'name', filterable: true,},
+                { title: 'Name (AR)', key: 'name_ar', filterable: true,},
+                { title: 'Description (EN)', key: 'description', filterable: true,},
+                { title: 'Description (AR)', key: 'description_ar', filterable: true,},
                 { title: 'Latitude', key: 'latitude', filterable: true,},
                 { title: 'Longitude', key: 'longitude', filterable: true,},
                 { title: 'Status', key: 'status', filterable: true,},
@@ -137,6 +139,21 @@ export default {
               <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
                 {{ item.name }}
               </v-chip>
+            </template>
+
+            <template v-slot:item.name_ar="{ item }">
+              <v-chip color="secondary" variant="outlined" rounded="pill" class="mr-2" v-if="item.name_ar">
+                {{ item.name_ar }}
+              </v-chip>
+              <span v-else class="text-grey">-</span>
+            </template>
+
+            <template v-slot:item.description="{ item }">
+              {{ item.description && item.description.length > 21 ? item.description.slice(0, 20) + '...' : item.description || '-' }}
+            </template>
+
+            <template v-slot:item.description_ar="{ item }">
+              {{ item.description_ar && item.description_ar.length > 21 ? item.description_ar.slice(0, 20) + '...' : item.description_ar || '-' }}
             </template>
 
             <template v-slot:item.map_url="{ item }">

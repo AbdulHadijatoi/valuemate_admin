@@ -67,10 +67,21 @@ export default {
             <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Service Type</span> 
+                  <span class="bold-text">Service Type (English)</span> 
                 </v-col>
                 <v-col cols="8">
                   <span class="mx-2">{{selectedRow.name}}</span>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col cols="6">
+              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+                <v-col cols="4">
+                  <span class="bold-text">Service Type (Arabic)</span> 
+                </v-col>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.name_ar || '-'}}</span>
                 </v-col>
               </v-row>
             </v-col>

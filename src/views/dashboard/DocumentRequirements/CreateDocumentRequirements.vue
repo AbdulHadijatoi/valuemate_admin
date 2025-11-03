@@ -32,7 +32,8 @@ export default {
       try {
         const isFileFlag = this.is_file ? 1 : 0;
         const responseData = await fetchWrapper.post(`${base_url}/admin/document-requirements/create`, { 
-          ...this.form,
+          document_name: this.form.document_name,
+          document_name_ar: this.form.document_name_ar,
           property_type_id: this.filter.property_type_id,
           service_type_id: this.filter.service_type_id,
           is_file: isFileFlag
@@ -88,8 +89,12 @@ export default {
                 />
               </v-col>
 
-              <v-col cols="12">
-                <v-text-field density="compact" variant="outlined" v-model="form.document_name" label="Document Name" required />
+              <v-col cols="6">
+                <v-text-field density="compact" variant="outlined" v-model="form.document_name" label="Document Name (English)" required />
+              </v-col>
+
+              <v-col cols="6">
+                <v-text-field density="compact" variant="outlined" v-model="form.document_name_ar" label="Document Name (Arabic)" />
               </v-col>
 
               <v-col cols="12">

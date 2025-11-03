@@ -20,7 +20,8 @@ export default {
             totalItems: 0,
             headers: [
                 { title: '#', key: 'id', filterable: true,},
-                { title: 'Property Type', key: 'name', filterable: true,},
+                { title: 'Property Type (EN)', key: 'name', filterable: true,},
+                { title: 'Property Type (AR)', key: 'name_ar', filterable: true,},
                 { title: 'Created Date', key: 'created_at_date', filterable: true,},
                 { title: 'Created Time', key: 'created_at_time', filterable: true,},
                 { title: 'Action', key: 'actions', filterable: false, },
@@ -187,6 +188,13 @@ export default {
               <v-chip color="primary" variant="outlined" rounded="pill" class="mr-2">
                 {{ item.name }}
               </v-chip>
+            </template>
+
+            <template v-slot:item.name_ar="{ item }">
+              <v-chip color="secondary" variant="outlined" rounded="pill" class="mr-2" v-if="item.name_ar">
+                {{ item.name_ar }}
+              </v-chip>
+              <span v-else class="text-grey">-</span>
             </template>
 
             <template v-slot:item.file="{ item }">

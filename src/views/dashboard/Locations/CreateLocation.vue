@@ -44,8 +44,12 @@ export default {
           <v-form @submit.prevent="saveData">
             <v-row>
 
-              <v-col cols="4">
-                <v-text-field density="compact" v-model="form.name" label="Name" required />
+              <v-col cols="6">
+                <v-text-field density="compact" v-model="form.name" label="Name (English)" required />
+              </v-col>
+
+              <v-col cols="6">
+                <v-text-field density="compact" v-model="form.name_ar" label="Name (Arabic)" />
               </v-col>
 
               <v-col cols="4">
@@ -62,8 +66,12 @@ export default {
                  density="compact" v-model="form.longitude" label="Longitude" />
               </v-col>
 
-              <v-col cols="12">
-                <v-textarea density="compact" v-model="form.description" label="Description" />
+              <v-col cols="6">
+                <v-textarea density="compact" v-model="form.description" label="Description (English)" />
+              </v-col>
+
+              <v-col cols="6">
+                <v-textarea density="compact" v-model="form.description_ar" label="Description (Arabic)" />
               </v-col>
               
               <v-col cols="12" class="text-right">

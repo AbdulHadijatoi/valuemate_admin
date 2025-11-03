@@ -18,8 +18,10 @@ export default {
             totalItems: 0,
             headers: [
                 { title: '#', key: 'id', filterable: true,},
-                { title: 'Title', key: 'title', filterable: true,},
-                { title: 'Description', key: 'description', filterable: true,},
+                { title: 'Title (EN)', key: 'title', filterable: true,},
+                { title: 'Title (AR)', key: 'title_ar', filterable: true,},
+                { title: 'Description (EN)', key: 'description', filterable: true,},
+                { title: 'Description (AR)', key: 'description_ar', filterable: true,},
                 { title: 'Image URL', key: 'image_url', filterable: true,},
                 // { title: 'Target Link', key: 'link', filterable: true,},
                 { title: 'Ad Type', key: 'ad_type', filterable: true,},
@@ -162,6 +164,13 @@ export default {
               </v-chip>
             </template>
 
+            <template v-slot:item.title_ar="{ item }">
+              <v-chip color="secondary" variant="outlined" rounded="pill" class="mr-2" v-if="item.title_ar">
+                {{ item.title_ar }}
+              </v-chip>
+              <span v-else class="text-grey">-</span>
+            </template>
+
             <template v-slot:item.image_url="{ item }">
                 <a style="text-decoration:none; color: darkblue; font-style:italic" :href="item.image_url" target="_blank" rel="noopener noreferrer">View Image</a>
             </template>
@@ -183,7 +192,11 @@ export default {
             </template>
             
             <template v-slot:item.description="{ item }">
-              {{ item.description.length > 21 ? item.description.slice(0, 20) + '...' : item.description }}
+              {{ item.description && item.description.length > 21 ? item.description.slice(0, 20) + '...' : item.description || '-' }}
+            </template>
+
+            <template v-slot:item.description_ar="{ item }">
+              {{ item.description_ar && item.description_ar.length > 21 ? item.description_ar.slice(0, 20) + '...' : item.description_ar || '-' }}
             </template>
 
             <template v-slot:item.ad_type="{ item }">

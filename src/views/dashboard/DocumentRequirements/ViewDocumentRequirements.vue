@@ -47,13 +47,24 @@ export default {
 
           <v-row class="p-0 m" style="background-color: white;">
             
-            <v-col cols="12">
+            <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Document Name</span> 
+                  <span class="bold-text">Document Name (English)</span> 
                 </v-col>
                 <v-col cols="8">
                   <span class="mx-2">{{selectedRow.document_name}}</span>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col cols="6">
+              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+                <v-col cols="4">
+                  <span class="bold-text">Document Name (Arabic)</span> 
+                </v-col>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.document_name_ar || '-'}}</span>
                 </v-col>
               </v-row>
             </v-col>

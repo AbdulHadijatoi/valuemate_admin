@@ -58,8 +58,28 @@ function request(method: Method) {
       // console.log('Response Data:', response.data);
       return response.data;  // Ensure we are returning the actual response data
     } catch (error: any) {
-      const errorText = error?.response?.data?.message || 'An unexpected error occurred. Please try again later.';
-      errorMessage(errorText);
+      // Handle 401 Unauthorized (token expired) or 403 Forbidden
+      if (error?.response?.status === 401 || error?.response?.status === 403) {
+        const authStore = useAuthStore();
+        // Only logout if we have a token (avoid infinite loops)
+        if (authStore.token) {
+          // Logout will handle clearing state and redirecting
+          authStore.logout(true);
+          // Show a message about session expiration
+          const errorText = error?.response?.data?.message || 'Your session has expired. Please login again.';
+          errorMessage(errorText);
+        }
+        // Create a new error to prevent further processing
+        const authError = new Error('Unauthorized');
+        (authError as any).isAuthError = true;
+        throw authError;
+      }
+      
+      // Don't show error messages for auth errors (already handled above)
+      if (!(error?.isAuthError)) {
+        const errorText = error?.response?.data?.message || 'An unexpected error occurred. Please try again later.';
+        errorMessage(errorText);
+      }
       throw error;  // Propagate the error so the caller can handle it
     }
   };

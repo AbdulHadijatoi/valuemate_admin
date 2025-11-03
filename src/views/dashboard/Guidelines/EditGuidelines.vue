@@ -15,13 +15,28 @@
         <v-card-text>
           <v-form>
             <v-row>
-              <v-col cols="12">
-                <v-text-field v-model="form.title" label="Title" required />
+              <v-col cols="6">
+                <v-text-field v-model="form.title" label="Title (English)" required />
               </v-col>
 
-              <v-col cols="12">
+              <v-col cols="6">
+                <v-text-field v-model="form.title_ar" label="Title (Arabic)" />
+              </v-col>
+
+              <v-col cols="6">
+                <div class="mb-2"><strong>Description (English)</strong></div>
                 <quill-editor
                   v-model:content="form.description"
+                  content-type="html"
+                  theme="snow"
+                  style="height: 300px;"
+                />
+              </v-col>
+
+              <v-col cols="6">
+                <div class="mb-2"><strong>Description (Arabic)</strong></div>
+                <quill-editor
+                  v-model:content="form.description_ar"
                   content-type="html"
                   theme="snow"
                   style="height: 300px;"
@@ -58,7 +73,9 @@ export default {
       form: {
         id: null,
         title: '',
+        title_ar: '',
         description: '',
+        description_ar: '',
       },
       file: null,
     };
@@ -67,7 +84,9 @@ export default {
   mounted() {
     this.form.id = this.selectedRow.id || null;
     this.form.title = this.selectedRow.title || '';
+    this.form.title_ar = this.selectedRow.title_ar || '';
     this.form.description = this.selectedRow.description || '';
+    this.form.description_ar = this.selectedRow.description_ar || '';
   },
 
   methods: {
@@ -77,7 +96,9 @@ export default {
         const payload = {
           id: this.form.id,
           title: this.form.title,
+          title_ar: this.form.title_ar,
           description: this.form.description, // this will be HTML
+          description_ar: this.form.description_ar, // this will be HTML
         };
 
         console.log('Sending to backend:', payload); // Optional: for debug

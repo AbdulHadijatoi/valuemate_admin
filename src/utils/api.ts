@@ -5,7 +5,8 @@ import "vue3-toastify/dist/index.css";
 
 const isAuthenticated = () => {
   const authStore = useAuthStore();
-  return !!authStore.user; // Returns true if user is authenticated, false otherwise
+  // Check both user and token exist
+  return !!(authStore.user && authStore.token); // Returns true if user is authenticated, false otherwise
 };
  
 // const isSuperAdmin = () => {

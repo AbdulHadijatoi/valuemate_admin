@@ -81,7 +81,14 @@ export default {
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.name" label="Name" required />
+                  v-model="form.name" label="Name (English)" required />
+              </v-col>
+
+              <v-col cols="6">
+                <v-text-field
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.name_ar" label="Name (Arabic)" />
               </v-col>
 
               <v-col cols="6">
@@ -122,11 +129,18 @@ export default {
                 />
               </v-col>
 
-              <v-col cols="12">
+              <v-col cols="6">
                 <v-textarea
                   variant="outlined"
                   density="compact"
-                  v-model="form.description" label="Description" />
+                  v-model="form.description" label="Description (English)" />
+              </v-col>
+
+              <v-col cols="6">
+                <v-textarea
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.description_ar" label="Description (Arabic)" />
               </v-col>
 
               <v-col cols="12" class="text-right">

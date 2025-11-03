@@ -57,7 +57,7 @@ export default {
             <v-col cols="6">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Name</span> 
+                  <span class="bold-text">Name (English)</span> 
                 </v-col>
                 <v-col cols="8">
                   <span class="mx-2">{{selectedRow.name}}</span>
@@ -65,13 +65,35 @@ export default {
               </v-row>
             </v-col>
 
+            <v-col cols="6">
+              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+                <v-col cols="4">
+                  <span class="bold-text">Name (Arabic)</span> 
+                </v-col>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.name_ar || '-'}}</span>
+                </v-col>
+              </v-row>
+            </v-col>
+
             <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
               <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
                 <v-col cols="4">
-                  <span class="bold-text">Description</span> 
+                  <span class="bold-text">Description (English)</span> 
                 </v-col>
                 <v-col cols="8">
-                  <span class="mx-2">{{selectedRow.description}}</span>
+                  <span class="mx-2">{{selectedRow.description || '-'}}</span>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col cols="6" style="background-color: rgba(0,0,0,0.1);">
+              <v-row variant="flat"  class="rounded-0 lighten-4 d-flex align-items-center">
+                <v-col cols="4">
+                  <span class="bold-text">Description (Arabic)</span> 
+                </v-col>
+                <v-col cols="8">
+                  <span class="mx-2">{{selectedRow.description_ar || '-'}}</span>
                 </v-col>
               </v-row>
             </v-col>

@@ -38,12 +38,27 @@ router.beforeEach(async (to, from, next) => {
   const authRequired = !publicPages.includes(to.path);
   const auth: AuthStore = useAuthStore();
 
+  // Check if user has valid token and user data
+  const hasValidAuth = auth.user && auth.token;
+
+  // If trying to access a protected route without valid auth
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (authRequired && !auth.user) {
+    if (authRequired && !hasValidAuth) {
+      // Clear any stale data
+      if (auth.user || auth.token) {
+        auth.logout(false); // Don't redirect, we'll do it manually
+      }
+      // Store the attempted URL for redirect after login
       auth.returnUrl = to.fullPath;
       return next('/login');
-    } else next();
+    } else {
+      next();
+    }
   } else {
+    // If logged in and trying to access login page, redirect to dashboard
+    if (to.path === '/login' && hasValidAuth) {
+      return next('/dashboard');
+    }
     next();
   }
 });

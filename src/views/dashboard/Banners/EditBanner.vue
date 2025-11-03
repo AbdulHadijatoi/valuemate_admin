@@ -30,9 +30,11 @@ export default {
       try {
         const responseData = await fetchWrapper.post(`${base_url}/admin/banner-ads/update/${this.form.id}`, { 
           title: this.form.title,
+          title_ar: this.form.title_ar,
           link: this.form.link,
           ad_type: this.form.ad_type,
           description: this.form.description,
+          description_ar: this.form.description_ar,
           start_date: this.dateRange ? this.formatDate(this.dateRange[0]) : this.form.start_date,
           end_date: this.dateRange ? this.formatDate(this.dateRange[1]) : this.form.end_date,
           file: this.file
@@ -100,8 +102,16 @@ export default {
                   variant="outlined"
                   density="compact"
                   v-model="form.title" 
-                  label="Title"
+                  label="Title (English)"
                   required />
+              </v-col>
+
+              <v-col cols="6">
+                <v-text-field
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.title_ar" 
+                  label="Title (Arabic)" />
               </v-col>
 
               <!-- <v-col cols="6">
@@ -122,11 +132,18 @@ export default {
                 />
               </v-col>
 
-              <v-col cols="12">
+              <v-col cols="6">
                 <v-textarea
                   variant="outlined"
                   density="compact"
-                  v-model="form.description" label="Description" />
+                  v-model="form.description" label="Description (English)" />
+              </v-col>
+
+              <v-col cols="6">
+                <v-textarea
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.description_ar" label="Description (Arabic)" />
               </v-col>
 
               <v-col cols="12" class="text-right">

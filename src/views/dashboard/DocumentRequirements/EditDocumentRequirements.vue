@@ -23,7 +23,9 @@ export default {
       this.loading = true;
       try {
         const responseData = await fetchWrapper.post(`${base_url}/admin/document-requirements/update/${this.form.id}`, { 
-          ...this.form
+          document_name: this.form.document_name,
+          document_name_ar: this.form.document_name_ar,
+          is_file: this.form.is_file
         });
         successMessage(responseData.message);
         this.$emit('close');
@@ -58,8 +60,12 @@ export default {
           <v-form @submit.prevent="updateData">
             <v-row>
 
-              <v-col cols="12">
-                <v-text-field v-model="form.document_name" label="Name" required />
+              <v-col cols="6">
+                <v-text-field v-model="form.document_name" label="Document Name (English)" required />
+              </v-col>
+
+              <v-col cols="6">
+                <v-text-field v-model="form.document_name_ar" label="Document Name (Arabic)" />
               </v-col>
 
               <v-col cols="12">

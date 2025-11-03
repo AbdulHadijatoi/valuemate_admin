@@ -52,8 +52,12 @@ export default {
             <v-row>
               
 
-              <v-col cols="12">
-                <v-text-field v-model="form.name" label="Name" required />
+              <v-col cols="6">
+                <v-text-field v-model="form.name" label="Name (English)" required />
+              </v-col>
+
+              <v-col cols="6">
+                <v-text-field v-model="form.name_ar" label="Name (Arabic)" />
               </v-col>
 
               <v-col cols="12" class="text-right">
