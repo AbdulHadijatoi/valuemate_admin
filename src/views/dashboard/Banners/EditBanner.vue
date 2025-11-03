@@ -28,17 +28,34 @@ export default {
     async updateData() {
       this.loading = true;
       try {
-        const responseData = await fetchWrapper.post(`${base_url}/admin/banner-ads/update/${this.form.id}`, { 
-          title: this.form.title,
-          title_ar: this.form.title_ar,
-          link: this.form.link,
-          ad_type: this.form.ad_type,
-          description: this.form.description,
-          description_ar: this.form.description_ar,
-          start_date: this.dateRange ? this.formatDate(this.dateRange[0]) : this.form.start_date,
-          end_date: this.dateRange ? this.formatDate(this.dateRange[1]) : this.form.end_date,
-          file: this.file
-        });
+        const formData = new FormData();
+        
+        // Append all form fields
+        if (this.form.title) formData.append('title', this.form.title);
+        if (this.form.title_ar) formData.append('title_ar', this.form.title_ar);
+        if (this.form.link) formData.append('link', this.form.link);
+        if (this.form.ad_type) formData.append('ad_type', this.form.ad_type);
+        if (this.form.description) formData.append('description', this.form.description);
+        if (this.form.description_ar) formData.append('description_ar', this.form.description_ar);
+        if (this.dateRange) {
+          formData.append('start_date', this.formatDate(this.dateRange[0]));
+          formData.append('end_date', this.formatDate(this.dateRange[1]));
+        } else {
+          if (this.form.start_date) formData.append('start_date', this.form.start_date);
+          if (this.form.end_date) formData.append('end_date', this.form.end_date);
+        }
+        
+        // Append file if it exists
+        // v-file-input may return a File or an array; normalize to a single File or null
+        const fileValue = Array.isArray(this.file)
+          ? this.file[0] || null
+          : this.file || null;
+        
+        if (fileValue instanceof File) {
+          formData.append('file', fileValue);
+        }
+        
+        const responseData = await fetchWrapper.post(`${base_url}/admin/banner-ads/update/${this.form.id}`, formData);
         successMessage(responseData.message);
         this.$emit('close');
         this.$emit('getData');

@@ -23,10 +23,26 @@ export default {
     async updateData() {
       this.loading = true;
       try {
-        const responseData = await fetchWrapper.post(`${base_url}/admin/companies/update/${this.form.id}`, { 
-          ...this.form,
-          file: this.file
+        const formData = new FormData();
+        
+        // Append all form fields
+        Object.keys(this.form).forEach(key => {
+          if (this.form[key] !== null && this.form[key] !== undefined) {
+            formData.append(key, this.form[key]);
+          }
         });
+        
+        // Append file if it exists
+        // v-file-input may return a File or an array; normalize to a single File or null
+        const fileValue = Array.isArray(this.file)
+          ? this.file[0] || null
+          : this.file || null;
+        
+        if (fileValue instanceof File) {
+          formData.append('file', fileValue);
+        }
+        
+        const responseData = await fetchWrapper.post(`${base_url}/admin/companies/update/${this.form.id}`, formData);
         successMessage(responseData.message);
         this.$emit('close');
         this.$emit('getData');
@@ -36,10 +52,6 @@ export default {
         this.loading = false;
       }
     },
-
-    handleFileUpload(e) {
-      this.file = e.target.files[0];
-    }
   },
 
   mounted() {

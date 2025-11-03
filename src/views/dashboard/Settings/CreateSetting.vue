@@ -38,10 +38,20 @@ export default {
     async uploadFile() {
       this.loading = true;
       try {
-        const responseData = await fetchWrapper.post(`${base_url}/admin/settings/upload-image`, { 
-          key: this.form.key,
-          value: this.file
-        });
+        const formData = new FormData();
+        formData.append('key', this.form.key);
+        
+        // Append file if it exists
+        // v-file-input may return a File or an array; normalize to a single File or null
+        const fileValue = Array.isArray(this.file)
+          ? this.file[0] || null
+          : this.file || null;
+        
+        if (fileValue instanceof File) {
+          formData.append('value', fileValue);
+        }
+        
+        const responseData = await fetchWrapper.post(`${base_url}/admin/settings/upload-image`, formData);
         successMessage(responseData.message);
         this.$emit('close');
         this.$emit('getData');
