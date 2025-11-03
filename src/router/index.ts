@@ -28,6 +28,7 @@ interface User {
 interface AuthStore {
   user: User | null;
   returnUrl: string | null;
+  isAuthenticated: boolean; // Pinia getter exposed as property
   login(username: string, password: string): Promise<void>;
   logout(): void;
 }
@@ -38,15 +39,15 @@ router.beforeEach(async (to, from, next) => {
   const authRequired = !publicPages.includes(to.path);
   const auth: AuthStore = useAuthStore();
 
-  // Check if user has valid token and user data
-  const hasValidAuth = auth.user && auth.token;
+  // Use store getter for auth state
+  const hasValidAuth = auth.isAuthenticated;
 
   // If trying to access a protected route without valid auth
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (authRequired && !hasValidAuth) {
       // Clear any stale data
-      if (auth.user || auth.token) {
-        auth.logout(false); // Don't redirect, we'll do it manually
+      if (auth.user) {
+        auth.logout(); // Don't pass args to match store typing
       }
       // Store the attempted URL for redirect after login
       auth.returnUrl = to.fullPath;
