@@ -79,7 +79,7 @@ export default {
         <v-card-text>
           <v-form @submit.prevent="saveData">
             <v-row>
-
+              <!-- Banner Image Upload -->
               <v-col cols="12">
                 <v-file-input
                   variant="outlined"
@@ -90,36 +90,18 @@ export default {
                 />
               </v-col>
 
+              <!-- Date Range -->
               <v-col cols="12" md="6">
-                <VueDatePicker v-model="dateRange" range :placeholder="`Select active date range from and to`" :clearable="true"/>
+                <VueDatePicker 
+                  v-model="dateRange" 
+                  range 
+                  :placeholder="`Select active date range from and to`" 
+                  :clearable="true"
+                />
               </v-col>
 
-              <v-col cols="6">
-                <v-text-field
-                  variant="outlined"
-                  density="compact"
-                  v-model="form.title" 
-                  label="Title (English)"
-                  required />
-              </v-col>
-
-              <v-col cols="6">
-                <v-text-field
-                  variant="outlined"
-                  density="compact"
-                  v-model="form.title_ar" 
-                  label="Title (Arabic)" />
-              </v-col>
-
-              <!-- <v-col cols="6">
-                <v-text-field
-                  variant="outlined"
-                  density="compact"
-                  v-model="form.link" 
-                  label="Target Link" />
-              </v-col> -->
-
-              <v-col cols="6">
+              <!-- Ad Type -->
+              <v-col cols="12" md="6">
                 <v-select
                   variant="outlined"
                   density="compact"
@@ -129,21 +111,49 @@ export default {
                 />
               </v-col>
 
-              <v-col cols="6">
+              <!-- Title Fields -->
+              <v-col cols="12" md="6">
+                <v-text-field
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.title" 
+                  label="Title (English)"
+                  required 
+                />
+              </v-col>
+
+              <v-col cols="12" md="6">
+                <v-text-field
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.title_ar" 
+                  label="Title (Arabic)" 
+                />
+              </v-col>
+
+              <!-- Description Fields -->
+              <v-col cols="12" md="6">
                 <v-textarea
                   variant="outlined"
                   density="compact"
-                  v-model="form.description" label="Description (English)" />
+                  v-model="form.description" 
+                  label="Description (English)"
+                  rows="3"
+                />
               </v-col>
 
-              <v-col cols="6">
+              <v-col cols="12" md="6">
                 <v-textarea
                   variant="outlined"
                   density="compact"
-                  v-model="form.description_ar" label="Description (Arabic)" />
+                  v-model="form.description_ar" 
+                  label="Description (Arabic)"
+                  rows="3"
+                />
               </v-col>
 
-              <v-col cols="12" class="text-right">
+              <!-- Submit Button -->
+              <v-col cols="12" class="text-right mt-2">
                 <v-btn elevation="0" size="x-large" :disabled="loading" color="primary" type="submit">
                   Save
                 </v-btn>

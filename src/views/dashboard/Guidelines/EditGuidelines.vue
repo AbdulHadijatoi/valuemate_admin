@@ -15,15 +15,28 @@
         <v-card-text>
           <v-form>
             <v-row>
-              <v-col cols="6">
-                <v-text-field v-model="form.title" label="Title (English)" required />
+              <!-- Title Fields -->
+              <v-col cols="12" md="6">
+                <v-text-field 
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.title" 
+                  label="Title (English)" 
+                  required 
+                />
               </v-col>
 
-              <v-col cols="6">
-                <v-text-field v-model="form.title_ar" label="Title (Arabic)" />
+              <v-col cols="12" md="6">
+                <v-text-field 
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.title_ar" 
+                  label="Title (Arabic)" 
+                />
               </v-col>
 
-              <v-col cols="6">
+              <!-- Description Fields -->
+              <v-col cols="12" md="6">
                 <div class="mb-2"><strong>Description (English)</strong></div>
                 <quill-editor
                   v-model:content="form.description"
@@ -33,7 +46,7 @@
                 />
               </v-col>
 
-              <v-col cols="6">
+              <v-col cols="12" md="6">
                 <div class="mb-2"><strong>Description (Arabic)</strong></div>
                 <quill-editor
                   v-model:content="form.description_ar"

@@ -62,18 +62,35 @@ export default {
         <v-card-text>
           <v-form @submit.prevent="saveData">
             <v-row>
-              
-
-              <v-col cols="6">
-                <v-text-field v-model="form.name" label="Name (English)" required />
+              <!-- Name Fields -->
+              <v-col cols="12" md="6">
+                <v-text-field 
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.name" 
+                  label="Name (English)" 
+                  required 
+                />
               </v-col>
 
-              <v-col cols="6">
-                <v-text-field v-model="form.name_ar" label="Name (Arabic)" />
+              <v-col cols="12" md="6">
+                <v-text-field 
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.name_ar" 
+                  label="Name (Arabic)" 
+                />
               </v-col>
 
-              <v-col cols="12" class="text-right">
-                <v-btn :disabled="loading" color="primary" type="submit">
+              <!-- Submit Button -->
+              <v-col cols="12" class="text-right mt-2">
+                <v-btn 
+                  elevation="0" 
+                  size="x-large" 
+                  :disabled="loading" 
+                  color="primary" 
+                  type="submit"
+                >
                   Save
                 </v-btn>
               </v-col>

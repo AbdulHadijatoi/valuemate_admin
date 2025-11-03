@@ -71,14 +71,14 @@ export default {
               <!-- Company Image Upload -->
               <v-col cols="12">
                 <v-file-input
+                  variant="outlined"
+                  density="compact"
                   label="Upload Company Image"
                   v-model="file"
                   accept="image/*"
-                  variant="outlined"
-                  density="compact"
                 />
-                <div class="mt-2">
-                  <a :href="form.file" target="_blank" v-if="form.file">
+                <div class="mt-2" v-if="form.file">
+                  <a :href="form.file" target="_blank">
                     <img
                       :src="form.file"
                       alt="Company Image"
@@ -89,49 +89,65 @@ export default {
                 </div>
               </v-col>
 
-              <v-col cols="6">
+              <!-- Name Fields -->
+              <v-col cols="12" md="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.name" label="Name (English)" required />
+                  v-model="form.name" 
+                  label="Name (English)" 
+                  required 
+                />
               </v-col>
 
-              <v-col cols="6">
+              <v-col cols="12" md="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.name_ar" label="Name (Arabic)" />
+                  v-model="form.name_ar" 
+                  label="Name (Arabic)" 
+                />
               </v-col>
 
-              <v-col cols="6">
+              <!-- Contact Information -->
+              <v-col cols="12" md="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.address" label="Address" />
+                  v-model="form.address" 
+                  label="Address" 
+                />
               </v-col>
 
-              <v-col cols="6">
+              <v-col cols="12" md="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.phone" label="Phone" />
+                  v-model="form.phone" 
+                  label="Phone" 
+                />
               </v-col>
 
-              <v-col cols="6">
+              <v-col cols="12" md="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.email" label="Email" />
+                  v-model="form.email" 
+                  label="Email" 
+                />
               </v-col>
 
-              <v-col cols="6">
+              <v-col cols="12" md="6">
                 <v-text-field
                   variant="outlined"
                   density="compact"
-                  v-model="form.website" label="Website" />
+                  v-model="form.website" 
+                  label="Website" 
+                />
               </v-col>
 
-              <v-col cols="6">
+              <!-- Status -->
+              <v-col cols="12" md="6">
                 <v-select
                   variant="outlined"
                   density="compact"
@@ -141,21 +157,29 @@ export default {
                 />
               </v-col>
 
-              <v-col cols="6">
+              <!-- Description Fields -->
+              <v-col cols="12" md="6">
                 <v-textarea
                   variant="outlined"
                   density="compact"
-                  v-model="form.description" label="Description (English)" />
+                  v-model="form.description" 
+                  label="Description (English)"
+                  rows="3"
+                />
               </v-col>
 
-              <v-col cols="6">
+              <v-col cols="12" md="6">
                 <v-textarea
                   variant="outlined"
                   density="compact"
-                  v-model="form.description_ar" label="Description (Arabic)" />
+                  v-model="form.description_ar" 
+                  label="Description (Arabic)"
+                  rows="3"
+                />
               </v-col>
 
-              <v-col cols="12" class="text-right">
+              <!-- Submit Button -->
+              <v-col cols="12" class="text-right mt-2">
                 <v-btn elevation="0" size="x-large" :disabled="loading" color="primary" type="submit">
                   Update
                 </v-btn>

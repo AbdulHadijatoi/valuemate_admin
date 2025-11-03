@@ -63,11 +63,12 @@ export default {
         <v-card-text>
           <v-form @submit.prevent="saveData">
             <v-row>
-              
+              <!-- Filters -->
               <v-col cols="12" md="6">
                 <v-autocomplete 
                   v-model="filter.property_type_id" 
-                  chips hide-no-data
+                  chips 
+                  hide-no-data
                   variant="outlined"
                   density="compact"
                   :items="property_types"
@@ -76,10 +77,12 @@ export default {
                   item-value="id"
                 />
               </v-col>
+              
               <v-col cols="12" md="6">
                 <v-autocomplete 
                   v-model="filter.service_type_id" 
-                  chips hide-no-data
+                  chips 
+                  hide-no-data
                   variant="outlined"
                   density="compact"
                   :items="service_types"
@@ -89,14 +92,27 @@ export default {
                 />
               </v-col>
 
-              <v-col cols="6">
-                <v-text-field density="compact" variant="outlined" v-model="form.document_name" label="Document Name (English)" required />
+              <!-- Document Name Fields -->
+              <v-col cols="12" md="6">
+                <v-text-field 
+                  variant="outlined"
+                  density="compact" 
+                  v-model="form.document_name" 
+                  label="Document Name (English)" 
+                  required 
+                />
               </v-col>
 
-              <v-col cols="6">
-                <v-text-field density="compact" variant="outlined" v-model="form.document_name_ar" label="Document Name (Arabic)" />
+              <v-col cols="12" md="6">
+                <v-text-field 
+                  variant="outlined"
+                  density="compact" 
+                  v-model="form.document_name_ar" 
+                  label="Document Name (Arabic)" 
+                />
               </v-col>
 
+              <!-- File Upload Switch -->
               <v-col cols="12">
                 <v-switch
                   v-model="is_file"
@@ -107,7 +123,8 @@ export default {
                 />
               </v-col>
 
-              <v-col cols="12" class="text-right">
+              <!-- Submit Button -->
+              <v-col cols="12" class="text-right mt-2">
                 <v-btn elevation="0" size="x-large" :disabled="loading" color="primary" type="submit">
                   Save
                 </v-btn>

@@ -59,15 +59,27 @@ export default {
         <v-card-text>
           <v-form @submit.prevent="updateData">
             <v-row>
-
-              <v-col cols="6">
-                <v-text-field v-model="form.document_name" label="Document Name (English)" required />
+              <!-- Document Name Fields -->
+              <v-col cols="12" md="6">
+                <v-text-field 
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.document_name" 
+                  label="Document Name (English)" 
+                  required 
+                />
               </v-col>
 
-              <v-col cols="6">
-                <v-text-field v-model="form.document_name_ar" label="Document Name (Arabic)" />
+              <v-col cols="12" md="6">
+                <v-text-field 
+                  variant="outlined"
+                  density="compact"
+                  v-model="form.document_name_ar" 
+                  label="Document Name (Arabic)" 
+                />
               </v-col>
 
+              <!-- File Upload Switch -->
               <v-col cols="12">
                 <v-switch
                   v-model="form.is_file"
@@ -78,7 +90,8 @@ export default {
                 />
               </v-col>
 
-              <v-col cols="12" class="text-right">
+              <!-- Submit Button -->
+              <v-col cols="12" class="text-right mt-2">
                 <v-btn elevation="0" size="x-large" :disabled="loading" color="primary" type="submit">
                   Update
                 </v-btn>
