@@ -108,11 +108,11 @@ const allMenuItems: menu[] = [
       to: '/users',
     },
 
-    {
-      title: 'Chats',
-      icon: MessageIcon,
-      to: '/chats',
-    },
+    // {
+    //   title: 'Chats',
+    //   icon: MessageIcon,
+    //   to: '/chats',
+    // },
     {
       title: 'Settings',
       icon: SettingsIcon,
