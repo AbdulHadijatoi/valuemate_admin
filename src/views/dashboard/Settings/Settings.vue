@@ -7,10 +7,11 @@ import { useAuthStore } from '@/stores/auth';
 import ViewSetting from './ViewSetting.vue';
 import EditSetting from './EditSetting.vue';
 import CreateSetting from './CreateSetting.vue';
+import { PlusIcon, EyeIcon, EditIcon, TrashIcon } from 'vue-tabler-icons';
 import { successMessage } from '@/utils/helpers/messages';
 
 export default {
-    components: { ViewSetting, EditSetting, CreateSetting },
+    components: { ViewSetting, EditSetting, CreateSetting, PlusIcon, EyeIcon, EditIcon, TrashIcon },
 
     data() {
         return {
