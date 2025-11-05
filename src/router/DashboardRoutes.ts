@@ -96,10 +96,9 @@ const DashboardRoutes = {
       component: () => import('@/views/dashboard/Settings/Settings.vue')
     },
     {
-      name: 'Chats',
-      path: '/chats',
-      // component: () => import('@/views/dashboard/Chats/Chats.vue')
-      component: () => import('@/views/dashboard/Companies/Companies.vue')
+      name: 'Support Chat',
+      path: '/support-chat',
+      component: () => import('@/views/dashboard/SupportChat/SupportChat.vue')
     },
     
   ]

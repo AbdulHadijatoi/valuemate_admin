@@ -108,11 +108,13 @@ const allMenuItems: menu[] = [
       to: '/users',
     },
 
-    // {
-    //   title: 'Chats',
-    //   icon: MessageIcon,
-    //   to: '/chats',
-    // },
+  {
+    title: 'Support Chat',
+    icon: MessageIcon,
+    to: '/support-chat',
+    chip: '0', // Will be updated dynamically
+    chipColor: 'error',
+  },
     {
       title: 'Settings',
       icon: SettingsIcon,

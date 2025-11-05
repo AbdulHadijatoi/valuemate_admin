@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue';
+import { shallowRef, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useCustomizerStore } from '../../../stores/customizer';
+import { useAuthStore } from '@/stores/auth';
 import sidebarItems from './sidebarItem';
+import { useSupportChat } from '@/composables/useSupportChat';
 
 import NavGroup from './NavGroup/NavGroup.vue';
 import NavItem from './NavItem/NavItem.vue';
@@ -9,7 +11,41 @@ import NavCollapse from './NavCollapse/NavCollapse.vue';
 import Logo from '../logo/LogoMain.vue';
 
 const customizer = useCustomizerStore();
-const sidebarMenu = shallowRef(sidebarItems);
+const authStore = useAuthStore();
+const { unreadCount, startPolling, stopPolling } = useSupportChat();
+
+// Make sidebar items reactive and update chip for Support Chat
+const sidebarMenu = computed(() => {
+  return sidebarItems.map(item => {
+    if (item.title === 'Support Chat') {
+      return {
+        ...item,
+        chip: unreadCount.value > 0 ? unreadCount.value.toString() : undefined,
+        chipColor: unreadCount.value > 0 ? 'error' : undefined,
+      };
+    }
+    return item;
+  });
+});
+
+// Start polling when authenticated
+watch(() => authStore.isAuthenticated, (isAuthenticated) => {
+  if (isAuthenticated) {
+    startPolling();
+  } else {
+    stopPolling();
+  }
+}, { immediate: true });
+
+onMounted(() => {
+  if (authStore.isAuthenticated) {
+    startPolling();
+  }
+});
+
+onUnmounted(() => {
+  stopPolling();
+});
 </script>
 
 <template>
