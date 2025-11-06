@@ -1,9 +1,9 @@
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref } from 'vue';
 import { fetchWrapper } from '@/utils/helpers/fetch-wrapper';
 import { base_url } from '@/utils/config';
 
 const unreadCount = ref(0);
-let pollingInterval: NodeJS.Timeout | null = null;
+let pollingInterval: ReturnType<typeof setInterval> | null = null;
 
 export function useSupportChat() {
   const fetchUnreadCount = async () => {
