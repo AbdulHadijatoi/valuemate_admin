@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { shallowRef, computed, watch, onMounted, onUnmounted } from 'vue';
+import { shallowRef, computed, onMounted } from 'vue';
 import { useCustomizerStore } from '../../../stores/customizer';
 import { useAuthStore } from '@/stores/auth';
 import sidebarItems from './sidebarItem';
@@ -12,7 +12,7 @@ import Logo from '../logo/LogoMain.vue';
 
 const customizer = useCustomizerStore();
 const authStore = useAuthStore();
-const { unreadCount, startPolling, stopPolling } = useSupportChat();
+const { unreadCount, refreshUnreadCount } = useSupportChat();
 
 // Make sidebar items reactive and update chip for Support Chat
 const sidebarMenu = computed(() => {
@@ -28,23 +28,11 @@ const sidebarMenu = computed(() => {
   });
 });
 
-// Start polling when authenticated
-watch(() => authStore.isAuthenticated, (isAuthenticated) => {
-  if (isAuthenticated) {
-    startPolling();
-  } else {
-    stopPolling();
-  }
-}, { immediate: true });
-
+// Fetch unread count once on mount (no continuous polling)
 onMounted(() => {
   if (authStore.isAuthenticated) {
-    startPolling();
+    refreshUnreadCount();
   }
-});
-
-onUnmounted(() => {
-  stopPolling();
 });
 </script>
 

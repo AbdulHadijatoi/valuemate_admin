@@ -157,8 +157,8 @@ export default {
   components: { RefreshIcon, XIcon, MessageIcon },
   
   setup() {
-    const { refreshUnreadCount } = useSupportChat();
-    return { refreshUnreadCount };
+    const { unreadCount, startPolling, stopPolling, refreshUnreadCount } = useSupportChat();
+    return { unreadCount, startPolling, stopPolling, refreshUnreadCount };
   },
   
   data() {
@@ -176,11 +176,16 @@ export default {
   
   mounted() {
     this.getChatRooms();
-    // Start polling for new messages every 5 seconds
+    // Start polling for new messages (local polling)
+    this.startLocalPolling();
+    // Start polling for unread count badge (composable polling)
     this.startPolling();
   },
   
   beforeUnmount() {
+    // Stop local polling for messages
+    this.stopLocalPolling();
+    // Stop polling for unread count badge
     this.stopPolling();
   },
   
@@ -267,7 +272,7 @@ export default {
       }
     },
     
-    startPolling() {
+    startLocalPolling() {
       // Poll for new chat rooms every 10 seconds
       this.pollingInterval = setInterval(() => {
         this.getChatRooms();
@@ -278,7 +283,7 @@ export default {
       }, 10000); // 10 seconds
     },
     
-    stopPolling() {
+    stopLocalPolling() {
       if (this.pollingInterval) {
         clearInterval(this.pollingInterval);
         this.pollingInterval = null;
